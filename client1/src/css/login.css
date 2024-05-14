@@ -1,0 +1,118 @@
+.Login_main {
+    position: relative;
+}
+
+.Login_inner {
+    background: linear-gradient(to right, rgb(214, 249, 249), white);
+    position: relative;
+    top: 10rem;
+    left: 23rem;
+    border: 0.5rem solid rgb(7, 205, 245); /* Adjust border width */
+    border-radius: 2rem;
+    height: 30rem;
+    width:70rem;
+    box-shadow: 10px 10px 10px rgb(5, 131, 209);
+}
+
+.select_type {
+    padding-top: 2rem;
+    padding-left: 2rem;
+    display: grid;
+    gap: 8rem;
+    grid-template-columns: 30rem 30rem;
+    border-radius: 2rem;
+}   
+
+.select_student {
+    background-color: white;
+    grid-column: 1;
+    align-items: center;
+    font-size: 4rem;
+    padding-left: 2rem;
+    border-radius: 5rem;
+    color: rgb(4, 171, 204);
+    transition: 0.5s;
+    box-shadow: 4px 4px 4px rgb(5, 131, 209);
+}
+
+.select_student:hover{
+    background: rgb(4, 171, 204);
+    color: white;
+    box-shadow: 10px 10px 10px rgb(5, 131, 209);
+}
+
+.select_admin {
+    background: white;
+    grid-column: 2;
+    align-items: center;
+    width: 28rem;
+    font-size: 4rem;
+    border-radius: 5rem;
+    color: rgb(4, 171, 204);
+    transition: 0.5s;
+    box-shadow: 4px 4px 4px rgb(5, 131, 209);
+}
+
+.select_admin:hover{
+    background: rgb(4, 171, 204);
+    color: white;  
+    box-shadow: 10px 10px 10px rgb(5, 131, 209);
+}
+
+.id_input{
+    display: grid;
+    padding-left: 10rem;
+}
+
+.id_label{
+    height: 5rem;
+    font-size: 3rem;
+    color: rgb(4, 171, 204);
+    text-shadow: 2px 2px 0px rgb(5, 131, 209);
+    padding-left: 18rem;
+    align-items: center;
+    padding-top: 2rem;
+}
+
+.passwd_label{
+    padding-left: 20rem;
+    height: 5rem;
+    font-size: 3rem;
+    color: rgb(4, 171, 204);
+    text-shadow: 2px 2px 0px rgb(5, 131, 209);
+    padding-left: 15rem;
+    padding-top: 2rem;
+}
+
+.id_in{
+    height: 3rem;
+    width: 50rem;
+    border-radius: 2rem;
+    font-size: 3rem;
+    box-shadow: 4px 4px 4px rgb(5, 131, 209);
+    border: rgb(5, 131, 209);
+    background-color: aliceblue;
+    color: rgb(5, 131, 209);
+}
+
+.passin{
+    height: 3rem;
+    width: 50rem;
+    border-radius: 2rem;
+    font-size: 3rem;
+    box-shadow: 4px 4px 4px rgb(5, 131, 209);
+    border: rgb(5, 131, 209);
+    background-color: aliceblue;
+    color: rgb(5, 131, 209);
+}
+
+.upper_label{
+    background: #333;
+    font-size: 6rem;
+    padding-top: 3rem;
+    text-shadow: 4px 4px 4px rgb(103, 180, 228);
+    padding-left: 40rem;
+    color:  rgb(4, 171, 204);
+    box-shadow: 4px 4px 4px rgb(5, 131, 209);
+    border-radius: 3.5rem;
+}
