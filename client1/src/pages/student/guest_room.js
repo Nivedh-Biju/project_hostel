@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavBarStudent from '../../components/navbarStudent';
-import "../../css/book_guest_room.css";
+import "../../css/guest_room.css";
 
 function GuestRoom_Student(){
     const { state } = useLocation();
