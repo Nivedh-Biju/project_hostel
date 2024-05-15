@@ -24,3 +24,7 @@
     transition: 0.5s;
     text-decoration: underline;
 }
+
+.filter_section{
+    flex: 0 0 100%;
+}

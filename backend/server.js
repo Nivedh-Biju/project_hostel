@@ -18,9 +18,41 @@ const pool = new Pool({
 app.use(express.json());
 
 // Define a route
-app.get('/', (req, res) => {
-    res.send('Hello, Express!');
+app.get('/api/complaints', async (req, res) => {
+  const { user, date, type } = req.query;
+  console.log(req.query);
+  try {
+    let query = "SELECT * FROM Complaints WHERE roll_no = $1";
+    let params = [user.id];
+
+    // Add date filter if provided
+    if (date != '') {
+      query += " AND application_date = $2";
+      params.push(date);
+    }
+
+    // Add type filter if provided
+    if ((type != '') && (date != '')) {
+      query += " AND complaint_type = $3";
+      params.push(type);
+    }
+    else if(type != ''){
+      query += " AND complaint_type = $2";
+      params.push(type); 
+    }
+    console.log(query);
+    const { rows: complaints } = await pool.query(query, params);
+    console.log(complaints);
+    res.json(complaints);
+  } catch (error) {
+    console.error('Error fetching complaints:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
+
+
+
+
 
 app.post("/api/login_student", async (req, res) => {
   const { id, passwd } = req.body;
