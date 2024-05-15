@@ -18,12 +18,12 @@ function GuestHouseRequest() {
     const { user } = useContext(UserContext);
     const [guestRequest, setGuestRequest] = useState({
         roll_no: user.id,
-        date: formattedDate,
+        request_date: formattedDate,
         type: "", // Initially empty
         occupant_name: "",
         phone_no: "",
-        start_date: "",
-        end_date: "",
+        start_date: formattedDate,
+        end_date: formattedDate,
     });
 
     // Handler function to update the guestRequest type
@@ -36,17 +36,77 @@ function GuestHouseRequest() {
           alert("Select type");
           return;
         }
+
+        if (!guestRequest.start_date || !guestRequest.end_date) {
+            alert("Please select start date and end date.");
+            return;
+        }
+        
+        if (!guestRequest.occupant_name) {
+            alert("Please enter occupant name.");
+            return;
+        }
+        
+        if (!guestRequest.phone_no) {
+            alert("Please enter phone number.");
+            return;
+        }
+
+        // console.log("----------------------------------------------------------------------------\n");
+        // console.log(guestRequest.request_date);
+        // console.log(typeof(guestRequest.request_date));
+        // console.log(guestRequest.start_date);
+        // console.log(typeof(guestRequest.start_date));
+        // console.log(guestRequest.end_date);
+        // console.log(typeof(guestRequest.end_date));
+        // console.log(guestRequest.phone_no);
+        // console.log(typeof(guestRequest.phone_no));
+        // console.log("----------------------------------------------------------------------------\n");
+
       
-        axios.post("http://localhost:3001/api/create_complaint", guestRequest)
-          .then(res => {
-            alert("Request lodged! You'll receive a mail on confirmation");
-            navigate('/home_student');
-          })
+        axios.post("http://localhost:3001/api/create_guest_request", guestRequest)
+        .then(response => {
+            // Check the response status code
+            if (response.status === 200) {
+                // Handle successful response
+                console.log("Request was successful");
+                console.log("Response data:", response.data);
+                alert("Request lodged! You'll receive a mail on confirmation");
+                navigate('/home_student');
+            } else {
+                // Handle other status codes if needed
+                console.log("Unexpected status code:", response.status);
+            }
+        })
           .catch(error => {
-            console.error("Error lodging guest house request:", error);
-            alert("Failed to lodge guest house request. Please try again.");
-          });
-    };
+            // Handle error response
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                console.error("Error response from server:", error.response.data);
+                console.error("Status code:", error.response.status);
+                switch (error.response.status) {
+                    case 400:
+                    alert('Bad Request: ' + 'Room unavailable for selected type and dates');
+                    break;
+                //   case 401:
+                //     alert('Unauthorized: ' + (error.response.data.message || 'You need to log in first.'));
+                //     break;
+                //   case 500:
+                //     alert('Server Error: ' + (error.response.data.message || 'Something went wrong on our end.'));
+                //     break;
+                    default:
+                    alert('An error occurred: ' + (error.response.data.message || 'Please try again later.'));
+                }
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error("No response received from server:", error.request);
+            } else {
+                // Something happened in setting up the request that triggered an error
+                console.error("Error lodging guest house request:", error);
+                alert("Failed to lodge guest house request. Please try again.");
+            }
+        });
+      };
       
 
 
@@ -98,7 +158,7 @@ function GuestHouseRequest() {
                     <input
                         className="phone_no_input"
                         style={{ display: guestRequest.type ? 'block' : 'none' }}
-                        type="tel"
+                        type="text"
                         value={guestRequest.phone_no}
                         onChange={(event) => setGuestRequest({ ...guestRequest, phone_no: event.target.value })}
                     />
@@ -108,7 +168,7 @@ function GuestHouseRequest() {
                     <input
                         className="start_date_input"
                         style={{ display: guestRequest.type ? 'block' : 'none' }}
-                        type="date" data-date="" data-date-format="DD MMMM YYYY"
+                        type="date" data-date="" data-date-format="yyyy-mm-dd"
                         value={guestRequest.start_date || formattedDate}
                         onChange={(event) => setGuestRequest({ ...guestRequest, start_date: event.target.value })}
                         />
@@ -118,7 +178,7 @@ function GuestHouseRequest() {
                     <input
                         className="end_date_input"
                         style={{ display: guestRequest.type ? 'block' : 'none' }}
-                        type="date" data-date="" data-date-format="DD MMMM YYYY"
+                        type="date" data-date="" data-date-format="yyyy-mm-dd"
                         value={guestRequest.end_date || formattedDate}
                         onChange={(event) => setGuestRequest({ ...guestRequest, end_date: event.target.value })}
                     />

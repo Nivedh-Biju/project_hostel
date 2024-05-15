@@ -1,0 +1,169 @@
+table Student: roll_no(primary key), name, phone_no, family_contact_no, address, sex, password
+
+table Admin: id(primary key), name, phone_no, address
+
+table Leave_records: record_id(primary key), roll_no(reference to Student roll_no), start_date, end_date, reason, status, application_date, admin_id(reference to id of Admin)
+
+table Complaints: roll_no(references Srudent roll_no), complaint_id(primary key), application_date, resolve_date, complaint_date
+
+table Hostel_Rooms: hostel_name(composite primary key), room_no(composite_primary_key), capacity
+
+table Allotted_rooms: hostel_name(composite primary key), room_no(composite_primary_key), roll_no (references Student roll_no)
+
+table Guest_rooms: guest_room(primary key), rate, type
+
+table Guest_house_request: occupant_name, phone_no, start_date, end_date, type, status, request_date
+
+table Allotted_guest_house: guest_room(primary key), occupant_name, phone_no, start_date, end_date, transaction_id, amount_paid, status, admin_id(references Admin id)
+
+
+
+SELECT Guest_rooms.guest_room
+FROM Guest_rooms
+LEFT JOIN Alloted_guest_house ON Guest_rooms.guest_room = Alloted_guest_house.guest_room
+WHERE (Alloted_guest_house.start_date IS NULL OR Alloted_guest_house.end_date < 'given_start_date' OR Alloted_guest_house.start_date > 'given_end_date')
+AND type = 'given_type';
+
+
+
+
+
+SELECT Guest_rooms.guest_room
+FROM Guest_rooms
+LEFT JOIN Alloted_guest_house ON Guest_rooms.guest_room = Alloted_guest_house.guest_room
+WHERE (Alloted_guest_house.start_date IS NULL OR Alloted_guest_house.ex CHAR(1),
+    passwd VARCHAR(255)  -- Changed column name to "passwd"
+);
+
+-- Creating table Admin
+CREATE TABLE Admin (
+    id VARCHAR(20) PRIMARY KEY,
+    name VARCHAR(255),
+    phone_no VARCHAR(15),
+    address VARCHAR(255),
+    passwd VARCHAR(255)  -- Changed column name to "passwd"
+);
+
+-- Creating table Leave_records
+CREATE TABLE Leave_records (
+    record_id SERIAL PRIMARY KEY,
+    roll_no VARCHAR(20) REFERENCES Student(roll_no),
+    start_date DATE,
+    end_date DATE,
+    reason VARCHAR(255),
+    status VARCHAR(50),
+    application_date DATE,
+    admin_id VARCHAR(20) REFERENCES Admin(id)
+);
+
+-- Creating table Complaints
+CREATE TABLE Complaints (
+    roll_no VARCHAR(20) REFERENCES Student(roll_no),
+    complaint_id SERIAL PRIMARY KEY,
+    application_date DATE,
+    resolve_date DATE,
+    complaint_date DATE
+);
+
+-- Creating table Hostel_Rooms
+CREATE TABLE Hostel_Rooms (
+    hostel_name VARCHAR(255),
+    room_no INT,
+    capacity INT,
+    PRIMARY KEY (hostel_name, room_no)
+);
+
+-- Creating table Allotted_rooms
+CREATE TABLE Allotted_rooms (
+    hostel_name VARCHAR(255),
+    room_no INT,
+    roll_no VARCHAR(20) REFERENCES Student(roll_no),
+    PRIMARY KEY (hostel_name, room_no),
+    FOREIGN KEY (hostel_name, room_no) REFERENCES Hostel_Rooms(hostel_name, room_no)
+);
+
+-- Creating table Guest_rooms
+CREATE TABLE Guest_rooms (
+    guest_room SERIAL PRIMARY KEY,
+    rate DECIMAL(10, 2),
+    type VARCHAR(50)
+);
+
+-- Creating table Guest_house_request
+CREATE TABLE Guest_house_request (
+    occupant_name VARCHAR(255),
+    phone_no VARCHAR(15),
+    start_date DATE,
+    end_date DATE,
+    transaction_id SERIAL,
+    amount_paid DECIMAL(10, 2)
+);
+
+-- Creating table Alloted_guest_house
+CREATE TABLE Alloted_guest_house (
+    guest_room INT REFERENCES Guest_rooms(guest_room),
+    occupant_name VARCHAR(255),
+    phone_no VARCHAR(15),
+    start_date DATE,
+    end_date DATE,
+    transaction_id BIGSERIAL,
+    amount_paid DECIMAL(10, 2),
+    status VARCHAR(50),
+    admin_id VARCHAR(20) REFERENCES Admin(id),
+    PRIMARY KEY (guest_room)
+);
+
+alter table alloted_guest_house
+rename to allotted_guest_house;
+
+
+ALTER TABLE Complaints
+ADD COLUMN description TEXT;
+
+
+-- Drop the complaint_date column
+ALTER TABLE Complaints DROP COLUMN complaint_date;
+
+-- Add a new column complaint_type
+ALTER TABLE Complaints ADD COLUMN complaint_type VARCHAR(255);
+
+-- Insert login details in student table
+insert into student(roll_no, name, passwd)
+values ('cs22b1043','Ishank','cs22b1043');
+
+alter table Guest_house_request
+drop column transaction_id,
+drop column amount_paid;
+
+alter table Guest_house_request
+add column type VARCHAR(50);
+
+alter table Guest_house_request
+add column status VARCHAR(50);
+
+alter table guest_house_request
+add column request_date DATE;
+
+
+
+
+-- Insert data into guest_rooms table
+INSERT INTO guest_rooms (guest_room, rate, type) VALUES
+(101, 1500.00, 'ac+bathroom'),
+(102, 1500.00, 'ac+bathroom'),
+(103, 1500.00, 'ac+bathroom'),
+(104, 1500.00, 'ac+bathroom'),
+(105, 1500.00, 'ac+bathroom'),
+
+(106, 1000.00, 'ac'),
+(107, 1000.00, 'ac'),
+(108, 1000.00, 'ac'),
+(109, 1000.00, 'ac'),
+(110, 1000.00, 'ac'),
+
+(111, 600.00, 'non-ac'),
+(112, 600.00, 'non-ac'),
+(113, 600.00, 'non-ac'),
+(114, 600.00, 'non-ac'),
+(115, 600.00, 'non-ac');
+
