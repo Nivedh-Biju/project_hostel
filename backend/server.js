@@ -11,8 +11,8 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'hostel',
-  password: 'spider',
-  port: 5433,
+  password: 'satvik',
+  port: 5432,
 });
 // Middleware to parse JSON requests
 app.use(express.json());
@@ -50,9 +50,74 @@ app.get('/api/complaints', async (req, res) => {
   }
 });
 
+app.get('/api/complaints_admin', async (req, res) => {
+  const { date, type, roll_no, resolved } = req.query;
+  console.log(req.query);
+  try {
+    let query = "SELECT * FROM Complaints WHERE complaint_id IS NOT NULL";
+    let params = [];
+    let paramIndex = 1; // To keep track of parameter indices
+
+    if (date !='') {
+        query += ` AND application_date = $${paramIndex}`;
+        params.push(date);
+        paramIndex++;
+    }
+
+    if (type!='') {
+        query += ` AND complaint_type = $${paramIndex}`;
+        params.push(type);
+        paramIndex++;
+    }
+
+    if (roll_no!='') {
+        query += ` AND roll_no LIKE $${paramIndex}`;
+        params.push(`%${roll_no}%`);
+        paramIndex++;
+    }
+
+    if (resolved!='') {
+        if (resolved === 'true') {
+            query += " AND resolve_date IS NOT NULL";
+        } else {
+            query += " AND resolve_date IS NULL";
+        }
+    }
+
+    const { rows: complaints } = await pool.query(query, params);
+    res.json(complaints);
+} catch (error) {
+    console.error('Error fetching complaints:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+
+});
 
 
 
+app.put('/api/complaints_admin_resolve', async (req, res) => {
+  const { complaint_id, user } = req.body;
+
+  if (!complaint_id || !user) {
+      return res.status(400).send('Complaint ID and user ID are required');
+  }
+
+  try {
+      const result = await pool.query(
+          'UPDATE Complaints SET resolve_date = NOW() WHERE complaint_id = $1',
+          [complaint_id]
+      );
+
+      if (result.rowCount === 0) {
+          return res.status(404).send('Complaint not found');
+      }
+
+      res.send('Complaint marked as resolved');
+  } catch (error) {
+      console.error('Error executing query', error);
+      res.status(500).send('Server error');
+  }
+});
 
 app.post("/api/login_student", async (req, res) => {
   const { id, passwd } = req.body;

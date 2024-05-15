@@ -1,7 +1,7 @@
 .navbar_main {
     position: relative;
     background-color: #333; /* Background color of the navbar */
-    height: 5rem;
+    height: 6rem;
     display: flex; /* Use flexbox for alignment */
     justify-content: flex-end; /* Align items to the right */
     border-radius: 1rem;
@@ -11,6 +11,7 @@
     list-style-type: none; /* Remove default list styling */
     padding: 0;
     top: 0;
+    margin-top: 0;
   }
   
   .navbar_main li {
@@ -26,7 +27,7 @@
     background-color: transparent;
     color: aqua;
     cursor: pointer; /* Show pointer cursor on hover */
-    font-size: 1.8rem; /* Button text font size */
+    font-size: 1.2rem; /* Button text font size */
     transition: 0.5s; /* Reduce transition duration */
     border-radius: 2rem;
   }
