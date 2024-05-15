@@ -1,0 +1,44 @@
+.navbar_admin_main {
+    position: relative;
+    background-color: #333; /* Background color of the navbar */
+    height: 5rem;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: flex-end; /* Align items to the right */
+    border-radius: 1rem;
+}
+  
+.navbar_admin_main ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+    top: 0;
+}
+
+.navbar_admin_main li {
+    top: 0;
+    display: inline; /* Display list items horizontally */
+    height: 5rem;
+    margin-left: 20px; /* Add some spacing between items */
+}
+
+.navbar_admin_main button {
+    width: 11rem;
+    border: none; /* Remove button border */
+    background-color: transparent;
+    color: aqua;
+    cursor: pointer; /* Show pointer cursor on hover */
+    font-size: 1.8rem; /* Button text font size */
+    transition: 0.5s; /* Reduce transition duration */
+    border-radius: 2rem;
+}
+
+.navbar_admin_main button.active {
+    color: black; /* Color of active button text */
+    background-color: aqua;
+    box-shadow: 2px 5px 5px rgb(9, 110, 110);
+    height: 3.5rem;
+    border-radius: 2rem;
+}
+
+.logout{
+    color: red !important;
+}
