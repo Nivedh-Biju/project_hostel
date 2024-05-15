@@ -72,6 +72,7 @@ function Complaint_Student() {
                     <ul className='complaint_items'>
                         {data.map(item => (
                             <li key={item.complaint_id} className='complaint_item'>
+                                <p className='complaint_id'>serial: {item.complaint_id}</p>
                                 <p className='complaint_type'>Type: {item.complaint_type}</p>
                                 <p className='complaint_date'>Application Date: {new Date(item.application_date).toLocaleDateString()}</p>
                                 <p className='complaint_description' onClick={() => handleDescriptionClick(item.description)}>Description: Click to view</p>

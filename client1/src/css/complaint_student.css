@@ -49,6 +49,7 @@
     height: 4rem;
     margin-right: 5rem;
     color: #333;
+    text-align: center;
     background-color: aqua;
     border-radius: 2rem;
     flex: 0 0 20%;
@@ -60,6 +61,7 @@
 .select_type{
     font-size: 1.3rem;
     height: 4rem;
+    text-align: center;
     flex: 0 0 30%;
     border-radius: 2rem;
     background-color: aqua;
@@ -105,7 +107,7 @@
     transition: 0.3s;
 }
 .complaint_item p{
-    flex: 0 0 25%;
+    flex: 0 0 18%;
     margin-left: 2rem;
     color: black;
     font-weight: 500;
