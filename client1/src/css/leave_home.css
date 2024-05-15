@@ -1,0 +1,26 @@
+.leave_applciation_inner{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.leave_applciation{
+    background: aqua;
+    height: 5rem;
+    flex: 0 0 50%;
+    border-radius: 5em;
+    font-size: 2rem;
+    border: none;
+    box-shadow: 5px 10px 5px #8a8a8a;
+    transition: 0.5s;
+}
+
+.leave_applciation:hover{
+    flex: 0 0 53%;
+    background: rgb(3, 225, 225);
+    font-size: 2.2rem;
+    box-shadow: 5px 12px 5px #6f6e6e;
+    transition: 0.5s;
+    text-decoration: underline;
+}
