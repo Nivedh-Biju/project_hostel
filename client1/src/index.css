@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("../../wallpaper.jpg"),linear-gradient(to top right,rgb(210, 171, 255),rgb(165, 249, 255));
+  background-blend-mode: screen;
 }
 
 code {
