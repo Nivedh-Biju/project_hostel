@@ -7,6 +7,9 @@ import Leave_Student from './pages/student/leave_student';
 import Complaint_Student from './pages/student/complaint_student';
 import GuestRoom_Student from './pages/student/guest_room';
 import CreateComplaintStudent from './pages/student/create_complaint_student';
+import Leave_Admin from './pages/admin/leave_admin';
+import Complaint_Admin from './pages/admin/complaint_admin';
+import GuestRoom_Admin from './pages/admin/guest_room_admin';
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
           <Route path = "/complaint_student" element = {<Complaint_Student/>} />
           <Route path = "/guest_room_student" element = {<GuestRoom_Student />} />
           <Route path = "/create_complaint_student" element = {<CreateComplaintStudent />} />
+          <Route path = "/leave_admin" element = {<Leave_Admin />} />
+          <Route path = "/complaint_admin" element = {<Complaint_Admin />} />
+          <Route path = "/guest_room_admin" element = {<GuestRoom_Admin />} />
         </Routes>
       </Router>
     </div>

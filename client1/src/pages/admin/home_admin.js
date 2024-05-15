@@ -1,13 +1,15 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import NavBarAdmin from '../../components/navbarAdmin';
+import UserContext from '../usercontext'; // Import the UserContext
 
 function Home_Admin(){
-    const { state } = useLocation();
-    const { id } = state || {};
-    const navigate = useNavigate();
+    const { user } = useContext(UserContext); // Access user data from the context
 
     return(
-        <h1>welcome ${id}</h1>
+        <div className='home_admin_main'>
+            <NavBarAdmin />
+            <h1>Good Morning {user.id}</h1>
+        </div>
     );
 }
 
