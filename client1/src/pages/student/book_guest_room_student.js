@@ -11,8 +11,8 @@ function GuestHouseRequest() {
     const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
     const year = currentDate.getFullYear();
   
-    // Format the date as a string (e.g., "12/31/2022")
-    const formattedDate = `${year}/${month}/${date}`;
+    // Format the date as a string (e.g., "12-31-2022")
+    const formattedDate = `${year}-${month}-${date}`;
 
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
@@ -20,7 +20,10 @@ function GuestHouseRequest() {
         roll_no: user.id,
         date: formattedDate,
         type: "", // Initially empty
-        description: "",
+        occupant_name: "",
+        phone_no: "",
+        start_date: "",
+        end_date: "",
     });
 
     // Handler function to update the guestRequest type
@@ -77,19 +80,51 @@ function GuestHouseRequest() {
                     </div>
                 </div>
 
-                {/* Input field for description */}
-                <label className="description_label">Reason for booking</label>
-                <textarea
-                    className="description_input"
-                    type="textarea"
-                    placeholder="Enter Description"
-                    onChange={(event) => {
-                        setGuestRequest({ ...guestRequest, description: event.target.value });
-                    }}
-                ></textarea>
+                {/* Input fields for details */}
+                <label className="type_label" style={{ display: guestRequest.type ? 'block' : 'none' }}>Enter Booking Details</label>
 
+                <div className="input_row">
+                    <label className="input_field_label" style={{ display: guestRequest.type ? 'block' : 'none' }}>Occupant's Name</label>
+                    <input
+                        className="occupant_name_input"
+                        style={{ display: guestRequest.type ? 'block' : 'none' }}
+                        type="text"
+                        value={guestRequest.occupant_name}
+                        onChange={(event) => setGuestRequest({ ...guestRequest, occupant_name: event.target.value })}
+                    />
+                </div>
+                <div className="input_row">
+                    <label className="input_field_label" style={{ display: guestRequest.type ? 'block' : 'none' }}>Phone Number</label>
+                    <input
+                        className="phone_no_input"
+                        style={{ display: guestRequest.type ? 'block' : 'none' }}
+                        type="tel"
+                        value={guestRequest.phone_no}
+                        onChange={(event) => setGuestRequest({ ...guestRequest, phone_no: event.target.value })}
+                    />
+                </div>
+                <div className="input_row">
+                    <label className="input_field_label" style={{ display: guestRequest.type ? 'block' : 'none' }}>Start Date</label>
+                    <input
+                        className="start_date_input"
+                        style={{ display: guestRequest.type ? 'block' : 'none' }}
+                        type="date" data-date="" data-date-format="DD MMMM YYYY"
+                        value={guestRequest.start_date || formattedDate}
+                        onChange={(event) => setGuestRequest({ ...guestRequest, start_date: event.target.value })}
+                        />
+                </div>
+                <div className="input_row">
+                    <label className="input_field_label" style={{ display: guestRequest.type ? 'block' : 'none' }}>End Date</label>
+                    <input
+                        className="end_date_input"
+                        style={{ display: guestRequest.type ? 'block' : 'none' }}
+                        type="date" data-date="" data-date-format="DD MMMM YYYY"
+                        value={guestRequest.end_date || formattedDate}
+                        onChange={(event) => setGuestRequest({ ...guestRequest, end_date: event.target.value })}
+                    />
+                </div>
                 {/* Button to submit guestRequest */}
-                <button className="submit_request" onClick={handlesubmit}>Submit</button>
+                <button className="submit_request" style={{ display: guestRequest.type ? 'block' : 'none' }} onClick={handlesubmit}>Submit</button>
                 </div>
             </div>
         </div>
