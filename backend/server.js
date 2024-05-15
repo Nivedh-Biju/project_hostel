@@ -11,7 +11,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'hostel',
-  password: 'NivedhBiju@020304',
+  password: 'PostgreSQL',
   port: 5432,
 });
 // Middleware to parse JSON requests
@@ -134,6 +134,50 @@ app.post("/api/create_complaint", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+
+app.post("/api/create_guest_request", async (req, res) => {
+  const { roll_no, request_date, type, occupant_name, phone_no, start_date, end_date } = req.body;
+
+  try {
+    // Check room availability
+    const query = {
+      text: `
+        SELECT Guest_rooms.guest_room
+        FROM Guest_rooms
+        LEFT JOIN Allotted_guest_house ON Guest_rooms.guest_room = Allotted_guest_house.guest_room
+        WHERE (Allotted_guest_house.start_date IS NULL OR Allotted_guest_house.end_date < $1 OR Allotted_guest_house.start_date > $2)
+        AND type = $3;
+      `,
+      values: [start_date, end_date, type]
+    };
+
+    const { rows } = await pool.query(query);
+
+    // If no rooms are available, return 'room unavailable' response
+    if (rows.length === 0) {
+      return res.status(400).json({ error: 'Room unavailable for selected type and dates' });
+    }
+
+    // Insert the guest house request into the database
+    const insertQuery = {
+      text: `
+        INSERT INTO Guest_house_request (occupant_name, phone_no, start_date, end_date, type, status, request_date) 
+        VALUES ($1, $2, $3, $4, $5, 'pending', $6)
+      `,
+      values: [occupant_name, phone_no, start_date, end_date, type, request_date]
+    };
+
+    await pool.query(insertQuery);
+
+    // Send response indicating success
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error("Error executing query:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 
 // Start the server
 app.listen(PORT, () => {
