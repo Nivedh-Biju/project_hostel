@@ -9,7 +9,7 @@ function Leave_Student(){
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/leave_applciation_student');
+        navigate('/leave_application_student');
     };
 
     return(
