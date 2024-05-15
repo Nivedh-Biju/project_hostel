@@ -1,3 +1,14 @@
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 0.8; }
+  }
+  
+  @keyframes fadeOut {
+    0% { opacity: 0.8; }
+    100% { opacity: 0; }
+  }
+  
+
 .complaint_student_inner{
     margin-top: 5rem;
     display: flex;
@@ -26,5 +37,127 @@
 }
 
 .filter_section{
+    margin-top: 8rem;
+    display: flex;
     flex: 0 0 100%;
+    justify-content: center;
+}
+
+.date_input{
+    font-size: 1.3rem;
+    margin-left: 5rem;
+    height: 4rem;
+    margin-right: 5rem;
+    color: #333;
+    background-color: aqua;
+    border-radius: 2rem;
+    flex: 0 0 20%;
+    box-shadow: 5px 5px 5px #333;
+    border: none;
+    transition: 0.3s;
+}
+
+.select_type{
+    font-size: 1.3rem;
+    height: 4rem;
+    flex: 0 0 30%;
+    border-radius: 2rem;
+    background-color: aqua;
+    box-shadow: 5px 5px 5px #333;
+    border: none;
+    color: #333;
+    border: none;
+    transition: 0.3s;
+}
+
+.select_type:hover{
+    background-color: rgb(3, 225, 225);
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 10px 10px 10px #333;
+}
+
+.date_input:hover{
+    background-color: rgb(3, 225, 225);
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 10px 10px 10px #333;
+}
+.filtered_complaints{
+    flex: 0 0 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.complaint_items{
+    flex: 0 0 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.complaint_item{
+    color: #333;
+    flex: 0 0 90%;
+    display: flex;
+    background-color: #aeadad;
+    margin-top: 2rem;
+    border-radius: 2rem;
+    transition: 0.3s;
+}
+.complaint_item p{
+    flex: 0 0 25%;
+    margin-left: 2rem;
+    color: black;
+    font-weight: 500;
+}
+
+.complaint_item:hover{
+    background-color: #858484;
+    cursor: pointer;
+    box-shadow: 5px 5px 5px;
+}
+
+.complaint_description {
+    flex: 0 0 25%; /* Adjust the width as needed */
+    margin-left: 2rem;
+    color: black;
+    font-weight: 500;
+    overflow-wrap: break-word; /* Apply text wrapping */
+}
+
+.complaint_description:hover{
+    color: aqua;
+}
+
+.complaint_description_modal {
+    position: fixed;
+    top: 30%; /* Adjust the positioning as needed */
+    left: 30%; /* Adjust the positioning as needed */
+    width: 40%; /* Adjust the width as needed */
+    height: 40%; /* Adjust the height as needed */
+    background-color: #333;
+    color: aqua;
+    font-size: 1.5rem;
+    z-index: 100; /* Higher z-index to ensure it's above other elements */
+    padding: 2rem;
+    overflow-y: auto; /* Add scrollbar if content exceeds height */
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow-wrap: break-word;
+    opacity: 0; /* Initially hide the modal */
+    animation: fadeOut 1s;
+}
+
+
+.complaint_description_modal.active {
+    animation: fadeIn 0.5s forwards;
+    opacity: 0.8;
+    visibility: visible;
+}
+
+/* Fade out the modal */
+.complaint_description_modal.fade-out {
+    animation: fadeOut 0.5s forwards;
+    opacity: 0;
+    visibility: hidden;
 }

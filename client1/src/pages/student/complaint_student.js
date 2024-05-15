@@ -10,6 +10,7 @@ function Complaint_Student() {
     const [data, setData] = useState([]);
     const [date, setDate] = useState('');
     const [type, setType] = useState('');
+    const [selectedDescription, setSelectedDescription] = useState(null);
     const { user } = useContext(UserContext);
 
     useEffect(() => {
@@ -31,21 +32,18 @@ function Complaint_Student() {
         navigate('/create_complaint_student');
     };
 
-    // const handleFilter = async () => {
-    //     try {
-    //         const params = { user: user.id, date : date, type : type };
-    //         const response = await axios.get('http://localhost:3001/api/complaints', {
-    //             params 
-    //         });
-    //         setData(response.data);
-    //     } catch (error) {
-    //         console.error('Error fetching data:', error);
-    //     }
-    // };
-    
-    const handleselectchange = async (e) =>{
-            setType(e.target.value);
-    }
+    const handleselectchange = (e) => {
+        setType(e.target.value);
+    };
+
+    const handleDescriptionClick = (description) => {
+        setSelectedDescription(description);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedDescription(null);
+    };
+
     return (
         <div className='complaint_student_main'>
             <NavBarStudent />
@@ -54,35 +52,40 @@ function Complaint_Student() {
             </div>
             <div className='filter_section'>
                 <input 
-                className='date_input'
+                    className='date_input'
                     type='date' 
                     value={date} 
                     onChange={(e) => setDate(e.target.value)} 
                 />
-                <select value={type} onChange={handleselectchange }>
+                <select className='select_type' value={type} onChange={handleselectchange}>
                     <option value=''>All Types</option>
                     <option value='plumbing'>Plumbing</option>
                     <option value='carpentry'>Carpentry</option>
                     <option value='LAN'>LAN</option>
                     <option value='electrical'>Electrical</option>
-                    <option value='others'>Others</option>  
-                </select>   
+                    <option value='others'>Others</option>
+                </select>
             </div>
             <div className='filtered_complaints'>
                 {/* Render fetched data here */}
                 {data && (
-                    <ul>
+                    <ul className='complaint_items'>
                         {data.map(item => (
-                            <li key={item.complaint_id}>
-                                <p>Type: {item.complaint_type}</p>
-                                <p>Application Date: {new Date(item.application_date).toLocaleDateString()}</p>
-                                <p>Description: {item.description}</p>
-                                <p>Status: {item.resolve_date ? 'Resolved' : 'Not Resolved'}</p>
+                            <li key={item.complaint_id} className='complaint_item'>
+                                <p className='complaint_type'>Type: {item.complaint_type}</p>
+                                <p className='complaint_date'>Application Date: {new Date(item.application_date).toLocaleDateString()}</p>
+                                <p className='complaint_description' onClick={() => handleDescriptionClick(item.description)}>Description: Click to view</p>
+                                <p className='complaint_status'>Status: {item.resolve_date ? 'Resolved' : 'Not Resolved'}</p>
                             </li>
                         ))}
                     </ul>
                 )}
             </div>
+            {selectedDescription && (
+                <div className={`complaint_description_modal ${selectedDescription ? 'active' : ''}`} onClick={handleCloseModal}>
+                    <p>{selectedDescription}</p>
+                </div>
+            )}
         </div>
     );
 }
