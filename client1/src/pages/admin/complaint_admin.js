@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import NavBarStudent from '../../components/navbarAdmin';
 import UserContext from '../usercontext';
 import axios from 'axios';
-import "../../css/complaint_admin.css"; // Make sure to import your CSS file
+import "../../css/admin/complaint_admin.css"; // Make sure to import your CSS file
 
 function Complaint_Student() {
     const navigate = useNavigate();

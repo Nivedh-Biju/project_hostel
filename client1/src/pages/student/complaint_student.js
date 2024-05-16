@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import NavBarStudent from '../../components/navbarStudent';
-import "../../css/complaint_student.css";
+import "../../css/student/complaint_student.css";
 import UserContext from '../usercontext'; // Import the UserContext
 
 function Complaint_Student() {

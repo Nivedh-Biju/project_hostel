@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import NavBarStudent from '../../components/navbarStudent';
 import UserContext from '../usercontext'; // Import the UserContext
-import '../../css/home_student.css';
+import '../../css/student/home_student.css';
 import axios from 'axios';
 
 function Home_Student(){

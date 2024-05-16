@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBarAdmin from "../../components/navbarAdmin";
-import "../../css/get_student_admin.css"; // Reuse the same CSS file
+import "../../css/admin/get_student_admin.css"; // Reuse the same CSS file
 import axios from "axios";
 
 function GetStudent() {

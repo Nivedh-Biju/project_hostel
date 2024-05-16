@@ -1,0 +1,127 @@
+.leave_admin_main {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.leave_admin_inner {
+    margin-top: 2rem;
+    display: flex;
+    flex: 0 0 100%;
+    justify-content: center;
+}
+
+.leave_admin_selectors {
+    display: flex;
+}
+
+.date_input_admin,
+.select_status_admin {
+    font-size: 1.1rem;
+    height: 3rem;
+    text-align: center;
+    flex: 0 0 20%;
+    border-radius: 2rem;
+    background-color: aqua;
+    box-shadow: 5px 5px 5px #333;
+    border: none;
+    color: #333;
+    margin: 1rem;
+    transition: 0.3s;
+}
+
+.date_input_admin:hover,
+.select_status_admin:hover {
+    background-color: rgb(3, 225, 225);
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 10px 10px 10px #333;
+}
+
+.leave_admin_filtered_applications {
+    flex: 0 0 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.leave_items_admin {
+    flex: 0 0 100%;
+}
+
+.leave_item_admin {
+    color: #333;
+    flex: 0 0 120%;
+    display: flex;
+    background-color: #aeadad;
+    margin-top: 2rem;
+    border-radius: 2rem;
+    transition: 0.3s;
+}
+
+.leave_item_admin p {
+    flex: 0 0 18%;
+    margin-left: 2rem;
+    color: black;
+    font-weight: 500;
+}
+
+.leave_item_admin:hover {
+    background-color: #858484;
+    cursor: pointer;
+    box-shadow: 5px 5px 5px;
+}
+
+/* Modal styles */
+
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 15; /* Set z-index lower than the navbar */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+.modal-content {
+    background-color: #333;
+    color: white;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    width: 40%;
+    max-width: 600px; /* Limit the maximum width */
+    text-align: center;
+    overflow-wrap: break-word;
+    position: relative;
+    z-index: 20; /* Ensure content is above the modal background */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px 2px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}

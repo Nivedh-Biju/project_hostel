@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import UserContext from "../usercontext";
 import axios from "axios";
 import NavBarStudent from "../../components/navbarStudent";
-import "../../css/leave_application.css";
+import "../../css/student/leave_application.css";
 import { useNavigate } from "react-router-dom";
 
 function LeaveApplicationStudent() {

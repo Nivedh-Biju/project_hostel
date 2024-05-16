@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavBarStudent from '../../components/navbarStudent';
-import "../../css/leave_home.css";
+import "../../css/student/leave_home.css";
 
 function Leave_Student() {
     const { state } = useLocation();
