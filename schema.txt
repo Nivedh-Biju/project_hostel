@@ -167,3 +167,37 @@ INSERT INTO guest_rooms (guest_room, rate, type) VALUES
 (114, 600.00, 'non-ac'),
 (115, 600.00, 'non-ac');
 
+
+alter table allotted_rooms                                                                                     
+drop constraint "allotted_rooms_pkey";
+
+alter table allotted_rooms
+add primary key (roll_no);
+
+--A trigger to make sure a room's capacity is respected
+CREATE FUNCTION validate_room_allocation() RETURNS TRIGGER AS $$
+BEGIN
+  DECLARE capacity INTEGER;
+BEGIN
+  SELECT capacity
+  INTO capacity
+  FROM hostel_rooms
+  WHERE hostel_name = NEW.hostel_name AND room_no = NEW.room_no;
+
+  -- Check if inserting exceeds capacity
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Room (%, %) not found in hostel_rooms table!', NEW.hostel_name, NEW.room_no;
+  ELSIF (SELECT COUNT(*) FROM allotted_rooms
+          WHERE hostel_name = NEW.hostel_name AND room_no = NEW.room_no) >= capacity THEN
+    RAISE EXCEPTION 'Room (%, %) capacity exceeded!', NEW.hostel_name, NEW.room_no;
+  END IF;
+END;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER enforce_room_capacity
+BEFORE INSERT ON allotted_rooms
+FOR EACH ROW
+EXECUTE PROCEDURE validate_room_allocation();
