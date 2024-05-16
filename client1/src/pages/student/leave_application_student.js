@@ -26,6 +26,8 @@ function LeaveApplicationStudent() {
         admin_id: "" // Initially empty
     });
 
+    
+
     const handlesubmit = () => {
         if (!leaveRecord.start_date || !leaveRecord.end_date) {
             alert("Please select start date and end date.");
@@ -36,9 +38,10 @@ function LeaveApplicationStudent() {
             alert("Please enter reason for leave.");
             return;
         }
-
+    
         axios.post("http://localhost:3001/api/create_leave_request", leaveRecord)
         .then(response => {
+            console.log("rando")
             if (response.status === 200) {
                 console.log("Request was successful");
                 console.log("Response data:", response.data);
@@ -49,50 +52,55 @@ function LeaveApplicationStudent() {
             }
         })
         .catch(error => {
-            console.error("Error submitting leave application:", error);
-            alert("Failed to submit leave application. Please try again.");
+            console.error("Error submitting leave application:"+ error);
+            alert("Failed to submit leave application. Please try again."+ error);
         });
+        
     };
       
     return (
         <div className="create_leave_request_main">
-            <NavBarStudent />
-            <div className="create_leave_request_inner">
-                <div className="create_leave_request_components">
-                    {/* Input fields for details */}
-                    <div className="input_row">
-                        <label className="input_field_label">Reason for Leave</label>
-                        <input
-                            className="reason_input"
-                            type="text"
-                            value={leaveRecord.reason}
-                            onChange={(event) => setLeaveRecord({ ...leaveRecord, reason: event.target.value })}
-                        />
-                    </div>
-                    <div className="input_row">
-                        <label className="input_field_label">Start Date</label>
-                        <input
-                            className="start_date_input"
-                            type="date" data-date="" data-date-format="yyyy-mm-dd"
-                            value={leaveRecord.start_date}
-                            onChange={(event) => setLeaveRecord({ ...leaveRecord, start_date: event.target.value })}
-                        />
-                    </div>
-                    <div className="input_row">
-                        <label className="input_field_label">End Date</label>
-                        <input
-                            className="end_date_input"
-                            type="date" data-date="" data-date-format="yyyy-mm-dd"
-                            value={leaveRecord.end_date}
-                            onChange={(event) => setLeaveRecord({ ...leaveRecord, end_date: event.target.value })}
-                        />
-                    </div>
-                    {/* Button to submit leave application */}
-                    <button className="submit_request" onClick={handlesubmit}>Submit</button>
-                </div>
+    <NavBarStudent />
+    <div className="create_leave_request_inner">
+        <div className="create_leave_request_components">
+            {/* Input field for reason */}
+            <div className="input_row">
+                <label className="input_field_label">Reason for Leave</label>
             </div>
+            <div className="input_row">
+                <input
+                    className="reason_input"
+                    type="text"
+                    value={leaveRecord.reason}
+                    onChange={(event) => setLeaveRecord({ ...leaveRecord, reason: event.target.value })}
+                    placeholder="Subject For The Leave Request"
+                />
+            </div>
+            {/* Input fields for start date and end date */}
+            <div className="input_row">
+                <label className="input_field_label">Start Date</label>
+                <input
+                    className="start_date_input"
+                    type="date"
+                    value={leaveRecord.start_date}
+                    onChange={(event) => setLeaveRecord({ ...leaveRecord, start_date: event.target.value })}
+                />
+            </div>
+            <div className="input_row">
+                <label className="input_field_label">End Date</label>
+                <input
+                    className="end_date_input"
+                    type="date"
+                    value={leaveRecord.end_date}
+                    onChange={(event) => setLeaveRecord({ ...leaveRecord, end_date: event.target.value })}
+                />
+            </div>
+            {/* Button to submit leave application */}
+            <button className="submit_request" onClick={handlesubmit}>Submit</button>
         </div>
-    );
+    </div>
+</div>
+);
 }
 
 export default LeaveApplicationStudent;
