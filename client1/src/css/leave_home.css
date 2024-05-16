@@ -39,8 +39,9 @@
     background-color: #aeadad;
     border-radius: 2rem;
     padding: 1.5rem;
-    margin: 1rem;
-    width: 300px;
+    margin: 10px;
+    width: calc(50% - 20px);
+    background-color: #f0f0f0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s;
 }

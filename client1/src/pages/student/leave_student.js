@@ -32,8 +32,8 @@ function Leave_Student() {
         <div className='leave_application_main'>
             <NavBarStudent />
             <div className='leave_application_inner'>
-                <h1>All Leave Requests</h1>
                 <button className='leave_application' onClick={handleClick}>Leave Application</button>
+                <h1>All Leave Requests:</h1>
                 <div className='leave_requests_list'>
                     {leaveRequests.length === 0 ? (
                         <p>No leave requests found.</p>
