@@ -11,8 +11,8 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'hostel',
-  password: 'satvik',
-  port: 5432,
+  password: 'spider',
+  port: 5433,
 });
 // Middleware to parse JSON requests
 app.use(express.json());

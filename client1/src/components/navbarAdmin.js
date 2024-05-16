@@ -17,6 +17,7 @@ function NavBarAdmin(){
     <div className='navbar_admin_main'>
       <ul>
         <li><button onClick={() => navigate('/home_admin')} className={location.pathname === '/home_admin' ? 'active' : ''}>Home</button></li>
+        <li><button onClick={() => navigate('/manage_hostel')} className={location.pathname === '/manage_hostel' ? 'active' : ''}>Hostel</button></li>
         <li><button onClick={() => navigate('/leave_admin')} className={location.pathname === '/leave_admin' ? 'active' : ''}>Leave</button></li>
         <li><button onClick={() => navigate('/complaint_admin')} className={location.pathname === '/complaint_admin' ? 'active' : ''}>Complaint</button></li>
         <li><button onClick={() => navigate('/guest_room_admin')} className={location.pathname === '/guest_room_admin' ? 'active' : ''}>Guest Room</button></li>
