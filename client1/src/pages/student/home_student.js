@@ -13,10 +13,9 @@ function Home_Student(){
 
     const fetchData = async () => {
         try {
-            let id=user.id;
-            let passwd=user.passwd;
+            let roll_no=user.id;
             const response = await axios.get('http://localhost:3001/api/student_detail', { 
-                params: { id , passwd } 
+                params: { roll_no } 
             });
             return(response.data[0])
         } 
@@ -30,6 +29,9 @@ function Home_Student(){
             const detailHTML=[];
             try {
                 let list = await fetchData();
+                list['HOSTEL']=list['HOSTEL NAME']+","+list['ROOM NUM'];
+                delete list['HOSTEL NAME'];
+                delete list['ROOM NUM'];
                 Object.keys(list).forEach(key => {
                     detailHTML.push(
                         <>
