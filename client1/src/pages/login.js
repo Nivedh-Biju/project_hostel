@@ -57,7 +57,7 @@ function Login(){
         <div className='Login_main'>
             <div className='upper_label'>Hostel Portal</div>
             <div className='Login_inner'>
-                <div className='select_type'>
+                <div className='select_type_login'>
                     <div className='select_student' onClick={() => {
                         setUser({...user, type: "student"});
                         handle_submit_student(); // Call handle_submit directly

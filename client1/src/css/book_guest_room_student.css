@@ -92,23 +92,21 @@
     border-radius: 5px;
   }
 
-.submit_request{
+  .submit_request {
     flex: 0 0 90%;
     margin: 3%;
-    height: 3rem;
-    font-size: 2.5rem;
+    font-size: 1.75rem;
     border-radius: 2rem;
     border: none;
     background-color: rgb(130, 252, 252);
-    box-shadow: 3px 3px 3px ;
+    box-shadow: 3px 3px 3px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.submit_request:hover{
+.submit_request:hover {
     background: aqua;
     box-shadow: 6px 6px 6px #333;
-    
 }
 
 
