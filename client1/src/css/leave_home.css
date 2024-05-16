@@ -1,26 +1,60 @@
-.leave_applciation_inner{
-    margin-top: 5rem;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+.leave_application_main {
+    padding: 2rem;
 }
 
-.leave_applciation{
-    background: aqua;
-    height: 5rem;
-    flex: 0 0 50%;
-    border-radius: 5em;
-    font-size: 2rem;
+.leave_application_inner {
+    margin-top: 2rem;
+}
+
+.leave_application {
+    background-color: aqua;
+    color: #333;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
     border: none;
-    box-shadow: 5px 10px 5px #8a8a8a;
-    transition: 0.5s;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
 
-.leave_applciation:hover{
-    flex: 0 0 53%;
-    background: rgb(3, 225, 225);
-    font-size: 2.2rem;
-    box-shadow: 5px 12px 5px #6f6e6e;
-    transition: 0.5s;
-    text-decoration: underline;
+.leave_application:hover {
+    background-color: rgb(3, 225, 225);
+    color: white;
+    transform: scale(1.05);
+}
+
+.leave_requests_list {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.leave_requests_list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.leave_requests_list li {
+    background-color: #aeadad;
+    border-radius: 2rem;
+    padding: 1.5rem;
+    margin: 1rem;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+}
+
+.leave_requests_list li:hover {
+    transform: translateY(-5px);
+}
+
+.leave_requests_list li p {
+    margin: 0.5rem 0;
+    color: #333;
+}
+
+.leave_requests_list li p:first-child {
+    font-weight: bold;
+    color: black;
 }

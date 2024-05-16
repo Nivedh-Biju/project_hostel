@@ -11,7 +11,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'hostel',
-  password: 'NivedhBiju@020304',
+  password: 'satvik',
   port: 5432,
 });
 // Middleware to parse JSON requests
@@ -47,6 +47,64 @@ app.get('/api/complaints', async (req, res) => {
   } catch (error) {
     console.error('Error fetching complaints:', error);
     res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/api/leave_requests', async (req, res) => {
+  const { roll_no, start_date, end_date, reason, status, application_date, admin_id } = req.query;
+
+  try {
+      let query = "SELECT * FROM Leave_records WHERE 1 = 1"; // Always true condition to start building the query dynamically
+      const values = [];
+
+      // Roll number filter
+      if (roll_no) {
+          query += ' AND roll_no = $1';
+          values.push(roll_no);
+      }
+
+      // Start date filter
+      if (start_date) {
+          query += ' AND start_date = $' + (values.length + 1);
+          values.push(start_date);
+      }
+
+      // End date filter
+      if (end_date) {
+          query += ' AND end_date = $' + (values.length + 1);
+          values.push(end_date);
+      }
+
+      // Reason filter
+      if (reason) {
+          query += ' AND reason = $' + (values.length + 1);
+          values.push(reason);
+      }
+
+      // Status filter
+      if (status) {
+          query += ' AND status = $' + (values.length + 1);
+          values.push(status);
+      }
+
+      // Application date filter
+      if (application_date) {
+          query += ' AND application_date = $' + (values.length + 1);
+          values.push(application_date);
+      }
+
+      // Admin ID filter
+      if (admin_id) {
+          query += ' AND admin_id = $' + (values.length + 1);
+          values.push(admin_id);
+      }
+
+      const leaveRequests = await pool.query(query, values);
+
+      res.json(leaveRequests.rows);
+  } catch (error) {
+      console.error('Error fetching leave requests:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
