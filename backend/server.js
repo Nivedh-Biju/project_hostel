@@ -11,7 +11,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'hostel',
-  password: 'satvik',
+  password: 'PostgreSQL',
   port: 5432,
 });
 // Middleware to parse JSON requests
@@ -93,6 +93,56 @@ app.get('/api/complaints_admin', async (req, res) => {
 
 });
 
+
+app.get('/api/guest_room_requests_admin', async (req, res) => {
+  const {occupant_name, phone_no, start_date, end_date, type, status, request_date} = req.query;
+  console.log(req.query);
+  try {
+    let query = "SELECT * "
+                + "FROM guest_house_request r"
+                + "WHERE occupant_name IS NOT NULL";
+    let params = [];
+    let paramIndex = 1; // To keep track of parameter indices
+    
+    if (occupant_name!='') {
+        query += ` AND occupant_name LIKE $${paramIndex}`;
+        params.push(`%${occupant_name}%`);
+        paramIndex++;
+    }
+    
+    if (phone_no!='') {
+        query += ` AND phone_no LIKE $${paramIndex}`;
+        params.push(`%${phone_no}%`);
+        paramIndex++;
+    }
+
+    if (start_date !='') {
+        query += ` AND start_date = $${paramIndex}`;
+        params.push(start_date);
+        paramIndex++;
+    }
+
+    if (type!='') {
+        query += ` AND type = $${paramIndex}`;
+        params.push(type);
+        paramIndex++;
+    }
+
+    if (status!='') {
+        query += ` AND status = $${paramIndex}`;
+        params.push(status);
+        paramIndex++;
+    }
+
+    query += ` ORDER BY request_date DESC`
+    const { rows: guest_room_requests } = await pool.query(query, params);
+    res.json(guest_room_requests);
+} catch (error) {
+    console.error('Error fetching guest_room_requests:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+
+});
 
 
 app.put('/api/complaints_admin_resolve', async (req, res) => {
