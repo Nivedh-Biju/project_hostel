@@ -29,6 +29,7 @@ function LeaveAdmin() {
     }, [date, status]);
 
     const handleStatusInput = (e) => {
+        console.log("setting status, "+e.target.value)
         setStatus(e.target.value);
     };
 
@@ -40,6 +41,7 @@ function LeaveAdmin() {
         if (!selectedApplication) return;
     
         try {
+            console.log(selectedApplication)
             await axios.put('http://localhost:3001/api/leave_admin_approve', {
                 record_id: selectedApplication.record_id,
                 admin_id: user.id
@@ -52,7 +54,7 @@ function LeaveAdmin() {
             setData(response.data);
             setSelectedApplication(null);
         } catch (error) {
-            console.error('Error marking as approved:', error);
+            console.log('Error marking as approved:'+ error);
         }
     };
 

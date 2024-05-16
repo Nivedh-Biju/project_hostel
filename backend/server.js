@@ -437,16 +437,19 @@ app.get('/api/leave_admin', async (req, res) => {
 });
 
 app.put('/api/leave_admin_approve', async (req, res) => {
-  const { leave_request_id, admin_id } = req.body;
+  const { record_id, admin_id } = req.body;
 
-  if (!leave_request_id || !admin_id) {
-      return res.status(400).send('Leave request ID and admin ID are required');
+  if (!record_id ) {
+      return res.status(400).send('Leave request ID is required');
   }
-
+  
+  if (!admin_id ) {
+    return res.status(400).send('admin ID is required');
+  }
   try {
       const result = await pool.query(
-          'UPDATE Leave_records SET status = $1, admin_id = $2 WHERE leave_request_id = $3',
-          ['approved', admin_id, leave_request_id]
+          'UPDATE Leave_records SET status = $1, admin_id = $2 WHERE record_id = $3',
+          ['Approved', admin_id, record_id]
       );
 
       if (result.rowCount === 0) {
@@ -461,16 +464,19 @@ app.put('/api/leave_admin_approve', async (req, res) => {
 });
 
 app.put('/api/leave_admin_reject', async (req, res) => {
-  const { leave_request_id, admin_id } = req.body;
+  const { record_id, admin_id } = req.body;
 
-  if (!leave_request_id || !admin_id) {
-      return res.status(400).send('Leave request ID and admin ID are required');
-  }
+if (!record_id ) {
+    return res.status(400).send('Leave request ID is required');
+}
 
+if (!admin_id ) {
+  return res.status(400).send('admin ID is required');
+}
   try {
       const result = await pool.query(
-          'UPDATE Leave_records SET status = $1, admin_id = $2 WHERE leave_request_id = $3',
-          ['rejected', admin_id, leave_request_id]
+          'UPDATE Leave_records SET status = $1, admin_id = $2 WHERE record_id = $3',
+          ['Rejected', admin_id, record_id]
       );
 
       if (result.rowCount === 0) {
