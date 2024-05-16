@@ -106,7 +106,7 @@
     box-shadow: 10px 10px 10px #333;
 }
 
-.complaint_admin_filtered_complaints{
+.guest_room_admin_filtered_requests{
     flex: 0 0 100%;
     display: flex;
     flex-wrap: wrap;
@@ -139,7 +139,7 @@
     box-shadow: 5px 5px 5px;
 }
 
-/* Add this to your complaint_student.css or equivalent CSS file */
+
 
 .navbar {
     z-index: 20; /* Ensure navbar is above the modal */
