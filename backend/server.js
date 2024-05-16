@@ -181,6 +181,17 @@ app.post("/api/login_student", async (req, res) => {
   }
 });
 
+app.get("/api/student_detail",async(req,res) => {
+  const { id, passwd } = req.query;
+  try{
+    const { rows:details } = await pool.query("SELECT S.roll_no \"ROLL NUM\",S.name \"NAME\",S.phone_no \"PHONE NUM\",S.family_contact_no \"FAMILY CONTACT NUM\",S.address \"ADDRESS\", S.sex \"GENDER\", CONCAT(A.hostel_name,A.room_no) AS \"HOSTEL\" FROM Student S FULL OUTER JOIN allotted_rooms A ON S.roll_no=A.roll_no WHERE S.roll_no=$1", [id]);
+    res.json(details);
+  }
+  catch (error){
+    console.error("Error getting details",error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+})
 
 app.post("/api/login_admin", async (req, res) => {
   const { id, passwd } = req.body;

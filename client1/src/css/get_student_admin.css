@@ -78,3 +78,8 @@
     font-weight: 2rem;
     opacity: 0.8;
 }
+
+.student_details_get_students li p{
+    opacity: 1;
+    font-weight: 500;
+}
