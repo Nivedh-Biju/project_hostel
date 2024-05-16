@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBarAdmin from '../../components/navbarAdmin'; // Make sure to import your Navbar component
-import UserContext from '../usercontext'; // Assuming you have a UserContext for authentication
+import NavBarAdmin from '../../components/navbarAdmin'; 
+import UserContext from '../usercontext'; 
 import axios from 'axios';
-import "../../css/admin/leave_admin.css"; // Import your CSS file
+import "../../css/admin/leave_admin.css"; 
 
 function LeaveAdmin() {
     const navigate = useNavigate();
