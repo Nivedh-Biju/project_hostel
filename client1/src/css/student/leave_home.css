@@ -21,21 +21,27 @@
 }
 
 .leave_requests_list {
+    flex: 0 0 96.3%;
+    display: flex;
     margin-top: 2rem;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     justify-content: center;
 }
 
 .leave_requests_list ul {
+    flex: 0 0 96.3%;
+    display: flex;
     list-style-type: none;
     padding: 0;
 }
 
 .leave_requests_list li {
+    flex: 0 0 96.3%;
+    display: flex;
     background-color: #aeadad;
     border-radius: 2rem;
-    padding: 1.5rem;
+    padding: 1rem;
     margin: 10px;
     width: calc(50% - 20px);
     background-color: #f0f0f0;
@@ -44,13 +50,25 @@
 }
 
 .leave_requests_list li:hover {
-    transform: translateY(-5px);
+    flex: 0 0 96.3%;
+    display: flex;
+    transform: translateY(-3.5px);
 }
 
 .leave_requests_list li p {
+    flex: 0 0 13%;
+    display: flex;
     margin: 0.5rem 0;
     color: #333;
+    font-weight: 500;
 }
+
+/* .complaint_item_admin p{
+    flex: 0 0 18%;
+    margin-left: 2rem;
+    color: black;
+    font-weight: 500;
+} */
 
 .leave_requests_list li p:first-child {
     font-weight: bold;
