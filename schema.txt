@@ -130,6 +130,8 @@ ALTER TABLE Complaints ADD COLUMN complaint_type VARCHAR(255);
 -- Insert login details in student table
 insert into student(roll_no, name, passwd)
 values ('cs22b1043','Ishank','cs22b1043');
+insert into student(roll_no, name, passwd)
+values ('cs22b1033','Satvik','cs22b1033');
 
 alter table Guest_house_request
 drop column transaction_id,
@@ -167,3 +169,11 @@ INSERT INTO guest_rooms (guest_room, rate, type) VALUES
 (114, 600.00, 'non-ac'),
 (115, 600.00, 'non-ac');
 
+
+-- Insert login details in admin table
+insert into admin(id, name, passwd)
+values ('admin','Ishank','admin');
+
+alter table allotted_guest_house
+drop column transaction_id,
+drop column amount_paid;
