@@ -105,11 +105,11 @@
     box-shadow: 10px 10px 10px #333;
 }
 
-.select_resolved_admin{
+.select_status_admin{
     font-size: 1.1rem;
     height: 3rem;
     text-align: center;
-    flex: 0 0 20%;
+    flex: 0 0 10%;
     border-radius: 2rem;
     background-color: aqua;
     box-shadow: 5px 5px 5px #333;
@@ -120,7 +120,7 @@
     transition: 0.3s;
 }
 
-.select_resolved_admin:hover{
+.select_status_admin:hover{
     background-color: rgb(3, 225, 225);
     font-size: 1.2rem;
     cursor: pointer;
