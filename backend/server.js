@@ -98,9 +98,9 @@ app.get('/api/guest_room_requests_admin', async (req, res) => {
   const {occupant_name, phone_no, start_date, end_date, type, status, request_date} = req.query;
   console.log(req.query);
   try {
-    let query = "SELECT * "
-                + "FROM guest_house_request r"
-                + "WHERE occupant_name IS NOT NULL";
+    let query = "SELECT * ";
+    query += "FROM guest_house_request ";
+    query += "WHERE occupant_name IS NOT NULL";
     let params = [];
     let paramIndex = 1; // To keep track of parameter indices
     
@@ -134,7 +134,7 @@ app.get('/api/guest_room_requests_admin', async (req, res) => {
         paramIndex++;
     }
 
-    query += ` ORDER BY request_date DESC`
+    query += ` ORDER BY request_date DESC`;
     const { rows: guest_room_requests } = await pool.query(query, params);
     res.json(guest_room_requests);
 } catch (error) {
