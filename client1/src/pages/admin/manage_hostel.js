@@ -14,9 +14,9 @@ function Manage_Hostel(){
     const [room_no, setRoomNo] = useState('');
 
     const handleValues=()=>{
-        setRollNo(document.querySelector(".manage_hostel_input_roll_no").value);
-        setHostel(document.querySelector(".manage_hostel_hostel_name").value);
-        setRoomNo(document.querySelector(".manage_hostel_room_num").value);
+        setRollNo(document.getElementById("roll_num_input").value);
+        setHostel(document.querySelector(".manage_hostel_select").value);
+        setRoomNo(document.getElementById("room_num_input").value);
     }
 
     //Function which connects to the backend
@@ -52,7 +52,7 @@ function Manage_Hostel(){
         const checkValid= async ()=>{
             try{
                 let capacity=0;
-                if(roll_no==="" && hostel_name==="" && room_no===""){
+                if(roll_no=="" && hostel_name=="" && room_no==""){
                     return;
                 }
                 const response=await axios.get('http://localhost:3001/api/get_hostel_detail',{
@@ -89,11 +89,13 @@ function Manage_Hostel(){
         <NavBarAdmin/>
         <div className='manage_hostel_main'>
             <div className='manage_hostel_student_info'>
-                <input className='manage_hostel_input_roll_no'
+                <input 
+                    id='roll_num_input'
+                    className='manage_hostel_input'
                     placeholder='Enter Roll No'
                 />
                 <select 
-                    className='manage_hostel_hostel_name' 
+                    className='manage_hostel_select' 
                 >
                     <option value=''>Select Hostel</option>
                     <option value='jasmine'>Jasmine</option>
@@ -104,11 +106,12 @@ function Manage_Hostel(){
                     <option value='lotus'>Lotus</option>
                 </select>
                 <input 
-                    className="manage_hostel_room_num" 
+                    id='room_num_input'
+                    className="manage_hostel_input" 
                     placeholder="Enter Room Number" 
                 />
-                <button onClick={handleValues}>Allocate</button>
             </div>
+            <button onClick={handleValues}>Allocate</button>
         </div>
         </>
     );
