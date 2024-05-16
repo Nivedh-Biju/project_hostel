@@ -141,7 +141,30 @@ app.get('/api/guest_room_requests_admin', async (req, res) => {
     console.error('Error fetching guest_room_requests:', error);
     res.status(500).json({ error: 'Internal Server Error' });
 }
+});
 
+app.put('/api/guest_room_requests_admin_approve', async (req, res) => {
+  const { occupant_name, user } = req.body;
+
+  if (!occupant_name || !user) {
+    return res.status(400).send('Request ID and user ID are required');
+  }
+
+  try {
+    const result = await pool.query(
+      'UPDATE guest_house_request SET status = \'approved\', approved_by = $1, approved_date = NOW() WHERE occupant_name = $2',
+      [user, occupant_name]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).send('Guest room request not found');
+    }
+
+    res.send('Guest room request marked as approved');
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).send('Server error');
+  }
 });
 
 
