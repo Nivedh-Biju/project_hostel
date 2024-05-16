@@ -240,14 +240,57 @@ app.post("/api/login_student", async (req, res) => {
 });
 
 app.get("/api/student_detail",async(req,res) => {
-  const { id, passwd } = req.query;
+  const { roll_no } = req.query;
+  console.log(req.query);
   try{
-    const { rows:details } = await pool.query("SELECT S.roll_no \"ROLL NUM\",S.name \"NAME\",S.phone_no \"PHONE NUM\",S.family_contact_no \"FAMILY CONTACT NUM\",S.address \"ADDRESS\", S.sex \"GENDER\", CONCAT(A.hostel_name,A.room_no) AS \"HOSTEL\" FROM Student S FULL OUTER JOIN allotted_rooms A ON S.roll_no=A.roll_no WHERE S.roll_no=$1", [id]);
+    const { rows:details } = await pool.query("SELECT S.roll_no \"ROLL NUM\",S.name \"NAME\",S.phone_no \"PHONE NUM\",S.family_contact_no \"FAMILY CONTACT NUM\",S.address \"ADDRESS\", S.sex \"GENDER\", A.hostel_name \"HOSTEL NAME\",A.room_no \"ROOM NUM\" FROM Student S FULL OUTER JOIN allotted_rooms A ON S.roll_no=A.roll_no WHERE S.roll_no=$1", [roll_no]);
     res.json(details);
   }
   catch (error){
     console.error("Error getting details",error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/api/get_hostel_detail",async(req,res) =>{
+  const { hostel_name, room_no } = req.query;
+  try{
+    const { rows:details } = await pool.query("SELECT * FROM hostel_rooms WHERE hostel_name = $1 and room_no=$2",[hostel_name,room_no]);
+    res.json(details);
+  }
+  catch (error){
+    console.error("Error getting details",error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/api/get_room_occupant_count",async(req,res) =>{
+  const { hostel_name, room_no }=req.query;
+  try{
+    const { rows:capacity } = await pool.query("SELECT COUNT(*) FROM allotted_rooms WHERE hostel_name=$1 and room_no=$2",[hostel_name,room_no]);
+    res.json(capacity);
+  }
+  catch(error){
+    console.error("Error getting details",error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+})
+
+app.post("/api/admin_allot_room",async(req,res) =>{
+  const { roll_no, hostel_name, room_no }=req.body;
+  console.log(req.body);
+  try{
+    const query = {
+      text: "INSERT INTO allotted_rooms VALUES ($1, $2, $3)",
+      values: [hostel_name,room_no,roll_no]
+    };
+    const { rows } = await pool.query(query);
+    console.log(rows);
+    res.status(200).json({ success: true });
+  }
+  catch(error){
+    console.error("Error getting details",error);
+    res.status(500).json({error:"Internal Server Error"});
   }
 })
 
