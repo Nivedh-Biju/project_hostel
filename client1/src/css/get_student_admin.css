@@ -1,0 +1,80 @@
+.get_student_selectors{
+    display: flex;
+    justify-content: center;
+}
+
+.roll_no_admin_get_student{
+    flex: 0 0 20%;
+    color: #333;
+    background-color: aqua;
+    height: 3rem;
+    border: none;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    box-shadow: 5px 5px 5px;
+    margin: 2rem;
+    transition: 0.3s;
+}
+
+.roll_no_admin_get_student:hover{
+    cursor: pointer;
+    background-color: rgb(5, 209, 209);
+    box-shadow: 10px 10px 10px;
+}
+
+.select_hostel_admin{
+    flex: 0 0 20%;
+    color: #333;
+    background-color: aqua;
+    height: 3rem;
+    border: none;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    box-shadow: 5px 5px 5px;
+    margin: 2rem;
+    transition: 0.3s;
+}
+
+.select_hostel_admin:hover{
+    cursor: pointer;
+    background-color: rgb(5, 209, 209);
+    box-shadow: 10px 10px 10px;
+}
+
+.room_no_admin_get_student{
+    flex: 0 0 20%;
+    color: #333;
+    background-color: aqua;
+    height: 3rem;
+    border: none;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    box-shadow: 5px 5px 5px;
+    margin: 2rem;
+    transition: 0.3s;
+}
+
+.room_no_admin_get_student:hover{
+    cursor: pointer;
+    background-color: rgb(5, 209, 209);
+    box-shadow: 10px 10px 10px;
+}
+
+.student_details_get_students{
+    flex: 0 0 50%;
+    margin-left: 5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.student_details_get_students li{
+    flex: 0 0 60%;
+    background-color: #898989;
+    margin-top: 3rem;
+    border: #333;
+    border-radius: 2rem;
+    color: black;
+    font-weight: 2rem;
+    opacity: 0.8;
+}

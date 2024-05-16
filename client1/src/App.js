@@ -12,6 +12,7 @@ import Complaint_Admin from './pages/admin/complaint_admin';
 import GuestRoom_Admin from './pages/admin/guest_room_admin';
 import GuestHouseRequest from './pages/student/book_guest_room_student';
 import LeaveApplicationStudemt from './pages/student/leave_application_student';
+import GetStudent from './pages/admin/get_student';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path = "/guest_room_admin" element = {<GuestRoom_Admin />} />
           <Route path = "/book_guest_room_student" element = {<GuestHouseRequest />} />
           <Route path = "/leave_application_student" element = {<LeaveApplicationStudemt />} />
+          <Route path = "/get_student" element ={<GetStudent />} />
         </Routes>
       </Router>
     </div>

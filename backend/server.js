@@ -94,6 +94,41 @@ app.get('/api/complaints_admin', async (req, res) => {
 });
 
 
+app.get('/api/get_students_admin', async (req, res) => {
+  const { roll_no, hostel,room_no } = req.query;
+  console.log(req.query);
+  try {
+    let query = "SELECT * FROM Student, Allotted_rooms WHERE Allotted_rooms.roll_no = Student.roll_no";
+    let params = [];
+    let paramIndex = 1; // To keep track of parameter indices
+
+    if (room_no !='') {
+        query += ` AND room_no = $${paramIndex}`;
+        params.push(room_no);
+        paramIndex++;
+    }
+
+    if (hostel!='') {
+        query += ` AND hostel_name = $${paramIndex}`;
+        params.push(hostel);
+        paramIndex++;
+    }
+
+    if (roll_no!='') {
+        query += ` AND Student.roll_no LIKE $${paramIndex}`;
+        params.push(`%${roll_no}%`);
+        paramIndex++;
+    }
+    console.log(query)
+    const { rows: students } = await pool.query(query, params);
+    res.json(students);
+} catch (error) {
+    console.error('Error fetching complaints:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+
+});
+
 
 app.put('/api/complaints_admin_resolve', async (req, res) => {
   const { complaint_id, user } = req.body;
