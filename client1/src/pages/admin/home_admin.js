@@ -8,11 +8,13 @@ function Home_Admin(){
     const { user } = useContext(UserContext); // Access user data from the context
     const navigate = useNavigate();
     return(
+        <>
+        <NavBarAdmin/>
         <div className='home_admin_main'>
-            <NavBarAdmin />
             <h1>Good Morning {user.id}</h1>
             <button onClick={ () => {navigate('/get_student');}}></button>
         </div>
+        </>
     );
 }
 

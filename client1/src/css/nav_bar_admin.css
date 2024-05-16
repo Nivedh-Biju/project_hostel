@@ -3,6 +3,7 @@
     position: relative;
     background-color: #333; /* Background color of the navbar */
     height: 6rem;
+    width: 100%;
     display: flex; /* Use flexbox for alignment */
     justify-content: flex-end; /* Align items to the right */
     border-radius: 1rem;

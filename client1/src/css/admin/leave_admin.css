@@ -1,12 +1,10 @@
 .leave_admin_main {
-    margin-top: 5rem;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .leave_admin_inner {
-    margin-top: 2rem;
     display: flex;
     flex: 0 0 100%;
     justify-content: center;
