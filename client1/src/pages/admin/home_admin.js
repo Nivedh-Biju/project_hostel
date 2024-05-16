@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBarAdmin from '../../components/navbarAdmin';
-import UserContext from '../usercontext'; // Import the UserContext
+import UserContext from '../usercontext'; // Import the UserContext';
+import "../../css/admin/home_admin.css";
 
 function Home_Admin(){
     const { user } = useContext(UserContext); // Access user data from the context

@@ -378,6 +378,112 @@ app.post("/api/create_leave_request", async (req, res) => {
   }
 });
 
+app.get('/api/leave_admin', async (req, res) => {
+  const { roll_no, start_date, end_date, reason, status, application_date, admin_id } = req.query;
+
+  try {
+      let query = "SELECT * FROM Leave_records WHERE 1 = 1"; // Always true condition to start building the query dynamically
+      const values = [];
+
+      // Roll number filter
+      if (roll_no) {
+          query += ' AND roll_no = $1';
+          values.push(roll_no);
+      }
+
+      // Start date filter
+      if (start_date) {
+          query += ' AND start_date = $' + (values.length + 1);
+          values.push(start_date);
+      }
+
+      // End date filter
+      if (end_date) {
+          query += ' AND end_date = $' + (values.length + 1);
+          values.push(end_date);
+      }
+
+      // Reason filter
+      if (reason) {
+          query += ' AND reason = $' + (values.length + 1);
+          values.push(reason);
+      }
+
+      // Status filter
+      if (status) {
+          query += ' AND status = $' + (values.length + 1);
+          values.push(status);
+      }
+
+      // Application date filter
+      if (application_date) {
+          query += ' AND application_date = $' + (values.length + 1);
+          values.push(application_date);
+      }
+
+      // Admin ID filter
+      if (admin_id) {
+          query += ' AND admin_id = $' + (values.length + 1);
+          values.push(admin_id);
+      }
+
+      const leaveRequests = await pool.query(query, values);
+
+      res.json(leaveRequests.rows);
+  } catch (error) {
+      console.error('Error fetching leave requests:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.put('/api/leave_admin_approve', async (req, res) => {
+  const { leave_request_id, admin_id } = req.body;
+
+  if (!leave_request_id || !admin_id) {
+      return res.status(400).send('Leave request ID and admin ID are required');
+  }
+
+  try {
+      const result = await pool.query(
+          'UPDATE Leave_records SET status = $1, admin_id = $2 WHERE leave_request_id = $3',
+          ['approved', admin_id, leave_request_id]
+      );
+
+      if (result.rowCount === 0) {
+          return res.status(404).send('Leave request not found');
+      }
+
+      res.send('Leave request approved');
+  } catch (error) {
+      console.error('Error executing query', error);
+      res.status(500).send('Server error');
+  }
+});
+
+app.put('/api/leave_admin_reject', async (req, res) => {
+  const { leave_request_id, admin_id } = req.body;
+
+  if (!leave_request_id || !admin_id) {
+      return res.status(400).send('Leave request ID and admin ID are required');
+  }
+
+  try {
+      const result = await pool.query(
+          'UPDATE Leave_records SET status = $1, admin_id = $2 WHERE leave_request_id = $3',
+          ['rejected', admin_id, leave_request_id]
+      );
+
+      if (result.rowCount === 0) {
+          return res.status(404).send('Leave request not found');
+      }
+
+      res.send('Leave request rejected');
+  } catch (error) {
+      console.error('Error executing query', error);
+      res.status(500).send('Server error');
+  }
+});
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
