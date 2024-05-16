@@ -1,3 +1,36 @@
 .home_student_main{
     padding-left: 20px;
 }
+
+.student_details_table{
+    display: grid;
+    grid-template-columns: 25% 25%;
+    grid-template-rows: auto auto auto auto auto auto auto;
+    margin-left: 25%;
+    font-size: 1.5rem;
+    text-wrap: wrap;
+    width: 100%;
+}
+
+.student_details_table .row_heading{
+    border: solid black;
+    border-bottom: none;
+    font-weight: bold;
+    color: aqua;
+    padding: 8px 20px;
+    background: grey;
+}
+
+.student_details_table .row_info{
+    text-align: center;
+    border: solid black;
+    border-bottom: none;
+    border-left: none;
+    padding: 8px 20px;
+    background-color: #00ffff33;
+    backdrop-filter: blur(2px);
+}
+
+.student_details_table :nth-child(13), .student_details_table :nth-child(14){
+    border-bottom: solid black;
+}
