@@ -26,6 +26,8 @@ function LeaveApplicationStudent() {
         admin_id: "" // Initially empty
     });
 
+    
+
     const handlesubmit = () => {
         if (!leaveRecord.start_date || !leaveRecord.end_date) {
             alert("Please select start date and end date.");
@@ -36,9 +38,10 @@ function LeaveApplicationStudent() {
             alert("Please enter reason for leave.");
             return;
         }
-
+    
         axios.post("http://localhost:3001/api/create_leave_request", leaveRecord)
         .then(response => {
+            console.log("rando")
             if (response.status === 200) {
                 console.log("Request was successful");
                 console.log("Response data:", response.data);
@@ -49,9 +52,10 @@ function LeaveApplicationStudent() {
             }
         })
         .catch(error => {
-            console.error("Error submitting leave application:", error);
-            alert("Failed to submit leave application. Please try again.");
+            console.error("Error submitting leave application:"+ error);
+            alert("Failed to submit leave application. Please try again."+ error);
         });
+        
     };
       
     return (

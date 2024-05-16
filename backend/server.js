@@ -243,6 +243,36 @@ app.post("/api/create_guest_request", async (req, res) => {
   }
 });
 
+app.post("/api/create_leave_request", async (req, res) => {
+  try {
+    // Extract data from the request body
+    const { roll_no, start_date, end_date, reason, status, application_date, admin_id } = req.body;
+    console.log(req.body)
+    
+    
+    // Validate request data
+    if (!roll_no || !start_date || !end_date || !reason || !status || !application_date) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    // Insert the leave request into the database
+    const insertQuery = {
+      text: `
+        INSERT INTO Leave_records (roll_no, start_date, end_date, reason, status, application_date) 
+        VALUES ($1, $2, $3, $4, $5, $6)
+      `,
+      values: [roll_no, start_date, end_date, reason, status, application_date]
+    };
+
+    await pool.query(insertQuery);
+
+    // Send response indicating success
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.log("Error executing query:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 // Start the server
 app.listen(PORT, () => {
