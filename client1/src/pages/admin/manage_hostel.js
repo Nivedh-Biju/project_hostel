@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBarAdmin from '../../components/navbarAdmin';
 import UserContext from '../usercontext'; // Import the UserContext';
-import "../../css/admin/home_admin.css";
+import "../../css/admin/manage_hostel.css";
 import axios from 'axios'
 
 function Manage_Hostel(){
@@ -17,11 +17,10 @@ function Manage_Hostel(){
         setRollNo(document.querySelector(".manage_hostel_input_roll_no").value);
         setHostel(document.querySelector(".manage_hostel_hostel_name").value);
         setRoomNo(document.querySelector(".manage_hostel_room_num").value);
-        //console.log(roll_no,hostel_name,room_no);
     }
 
+    //Function which connects to the backend
     const allocate_room = (roll_no,hostel_name,room_no)=>{
-        console.log('Hello');
         axios.post("http://localhost:3001/api/admin_allot_room",{
             roll_no,hostel_name,room_no
         })
@@ -35,6 +34,7 @@ function Manage_Hostel(){
     }
 
     useEffect(()=>{
+        //Make sure there are no room capacity violations
         const checkCapacity= async (total_capacity)=>{
             const response = await axios.get('http://localhost:3001/api/get_room_occupant_count',{
                 params: {hostel_name,room_no}
@@ -48,6 +48,7 @@ function Manage_Hostel(){
             }
         }
 
+        //Make sure there are no invalid hostel_name,room_no and roll_no
         const checkValid= async ()=>{
             try{
                 let capacity=0;

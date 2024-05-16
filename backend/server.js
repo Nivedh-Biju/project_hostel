@@ -285,7 +285,7 @@ app.post("/api/admin_allot_room",async(req,res) =>{
       values: [hostel_name,room_no,roll_no]
     };
     const { rows } = await pool.query(query);
-    console.log(rows);
+    console.log('Room alloted');
     res.status(200).json({ success: true });
   }
   catch(error){
