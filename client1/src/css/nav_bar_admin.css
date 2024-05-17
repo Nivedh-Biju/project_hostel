@@ -6,7 +6,9 @@
     width: 100%;
     display: flex; /* Use flexbox for alignment */
     justify-content: flex-end; /* Align items to the right */
-    border-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    flex-wrap: nowrap;
 }
   
 .navbar_admin_main ul {

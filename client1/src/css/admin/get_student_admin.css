@@ -4,6 +4,7 @@
 }
 
 .roll_no_admin_get_student{
+    text-align: center;
     flex: 0 0 20%;
     color: #333;
     background-color: aqua;
@@ -23,6 +24,7 @@
 }
 
 .select_hostel_admin{
+    text-align: center;
     flex: 0 0 20%;
     color: #333;
     background-color: aqua;
@@ -42,6 +44,7 @@
 }
 
 .room_no_admin_get_student{
+    text-align: center;
     flex: 0 0 20%;
     color: #333;
     background-color: aqua;
@@ -61,22 +64,21 @@
 }
 
 .student_details_get_students{
-    flex: 0 0 50%;
-    margin-left: 5rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .student_details_get_students li{
+    padding-left: 40px;
+    list-style-type: decimal;
     flex: 0 0 60%;
-    background-color: #898989;
+    background-color: #898989ea;
     margin-top: 3rem;
     border: #333;
     border-radius: 2rem;
     color: black;
     font-weight: 2rem;
-    opacity: 0.8;
 }
 
 .student_details_get_students li p{

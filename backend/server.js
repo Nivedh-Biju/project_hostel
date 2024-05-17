@@ -11,7 +11,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'hostel',
-  password: 'PostgreSQL',
+  password: 'spider',
   port: 5432,
 });
 // Middleware to parse JSON requests
