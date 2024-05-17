@@ -123,10 +123,13 @@ ALTER TABLE Complaints DROP COLUMN complaint_date;
 ALTER TABLE Complaints ADD COLUMN complaint_type VARCHAR(255);
 
 -- Insert login details in student table
-insert into student(roll_no, name, passwd)
-values ('cs22b1043','Ishank','cs22b1043');
-insert into student(roll_no, name, passwd)
-values ('cs22b1033','Satvik','cs22b1033');
+INSERT INTO Student (roll_no, name, phone_no, family_contact_no, address, sex, passwd) VALUES
+('cs22b1043', 'Ishank', '1234567890', '0987654321', '123 Main St', 'M', 'cs22b1043'),
+('cs22b1033', 'Satvik', '2345678901', '1234567890', '456 Oak St', 'M', 'cs22b1033'),
+('cs22b1022', 'Ravi', '3456789012', '2345678901', '789 Pine St', 'M', 'cs22b1022'),
+('cs22b1011', 'Anjali', '4567890123', '3456789012', '101 Maple St', 'F', 'cs22b1011'),
+('cs22b1000', 'Neha', '5678901234', '4567890123', '202 Birch St', 'F', 'cs22b1000');
+
 
 alter table Guest_house_request
 drop column transaction_id,
@@ -141,6 +144,14 @@ add column status VARCHAR(50);
 alter table guest_house_request
 add column request_date DATE;
 
+
+-- insert data into admin table
+INSERT INTO Admin (id, name, phone_no, address, passwd) VALUES
+('admin1', 'Ishank', '5678901234', '123 Main St', 'admin1pass'),
+('admin2', 'Amit', '6789012345', '456 Oak St', 'admin2pass'),
+('admin3', 'Suman', '7890123456', '789 Pine St', 'admin3pass'),
+('admin4', 'Raj', '8901234567', '101 Maple St', 'admin4pass'),
+('admin5', 'Priya', '9012345678', '202 Birch St', 'admin5pass');
 
 
 
@@ -239,3 +250,71 @@ CREATE TRIGGER enforce_room_capacity
 BEFORE INSERT ON allotted_rooms
 FOR EACH ROW
 EXECUTE PROCEDURE validate_room_allocation();
+
+
+-- insert data into leave_records
+INSERT INTO Leave_records (roll_no, start_date, end_date, reason, status, application_date, admin_id) VALUES
+('cs22b1043', '2024-06-01', '2024-06-07', 'Medical leave', 'Pending', '2024-05-01', 'admin1'),
+('cs22b1033', '2024-07-01', '2024-07-15', 'Family function', 'Approved', '2024-06-01', 'admin2'),
+('cs22b1022', '2024-08-01', '2024-08-05', 'Conference', 'Disapproved', '2024-07-01', 'admin3'),
+('cs22b1011', '2024-09-01', '2024-09-10', 'Vacation', 'Pending', '2024-08-01', 'admin4'),
+('cs22b1000', '2024-10-01', '2024-10-20', 'Research trip', 'Approved', '2024-09-01', 'admin5');
+
+
+-- insert data into complaints
+INSERT INTO Complaints (roll_no, application_date, resolve_date, description, complaint_type) VALUES
+('cs22b1043', '2024-05-01', '2024-05-10', 'Leaking faucet in bathroom', 'Maintenance'),
+('cs22b1033', '2024-06-01', NULL, 'Broken window in room', 'Maintenance'),
+('cs22b1022', '2024-07-01', '2024-07-05', 'Noise disturbance', 'Discipline'),
+('cs22b1011', '2024-08-01', NULL, 'Wi-Fi not working', 'IT'),
+('cs22b1000', '2024-09-01', '2024-09-10', 'Room cleaning', 'Housekeeping');
+
+
+-- insert data into hostel_rooms
+-- Insert data into Hostel_Rooms table
+INSERT INTO Hostel_Rooms (hostel_name, room_no, capacity) VALUES
+('ashwatha', 101, 2),
+('ashwatha', 102, 3),
+('ashwatha', 103, 2),
+('ashwatha', 104, 4),
+('ashwatha', 105, 2),
+
+('jasmine', 201, 3),
+('jasmine', 202, 4),
+('jasmine', 203, 2),
+('jasmine', 204, 3),
+('jasmine', 205, 4),
+
+('jasmine_annex', 301, 2),
+('jasmine_annex', 302, 3),
+('jasmine_annex', 303, 2),
+('jasmine_annex', 304, 4),
+('jasmine_annex', 305, 3),
+
+('ashoka', 401, 2),
+('ashoka', 402, 3),
+('ashoka', 403, 4),
+('ashoka', 404, 2),
+('ashoka', 405, 3),
+
+('banayan', 501, 4),
+('banayan', 502, 3),
+('banayan', 503, 2),
+('banayan', 504, 4),
+('banayan', 505, 3),
+
+('lotus', 601, 2),
+('lotus', 602, 3),
+('lotus', 603, 4),
+('lotus', 604, 2),
+('lotus', 605, 3);
+
+
+-- insert data in guest_house_request
+INSERT INTO Guest_house_request (occupant_name, phone_no, start_date, end_date, type, status, request_date) VALUES
+('John Doe', '1234567890', '2024-06-01', '2024-06-05', 'ac+bathroom', 'Pending', '2024-05-01'),
+('Jane Smith', '2345678901', '2024-07-01', '2024-07-03', 'ac', 'Approved', '2024-06-01'),
+('Alice Johnson', '3456789012', '2024-08-01', '2024-08-10', 'non-ac', 'Disapproved', '2024-07-01'),
+('Bob Brown', '4567890123', '2024-09-01', '2024-09-02', 'ac+bathroom', 'Pending', '2024-08-01'),
+('Charlie Davis', '5678901234', '2024-10-01', '2024-10-07', 'ac', 'Approved', '2024-09-01');
+
