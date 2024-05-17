@@ -206,3 +206,36 @@ values ('admin','Ishank','admin');
 alter table allotted_guest_house
 drop column transaction_id,
 drop column amount_paid;
+
+
+-- change.txt 
+DROP TRIGGER enforce_room_capacity ON allotted_rooms;
+DROP FUNCTION validate_room_allocation;
+
+--A trigger to make sure a room's capacity is respected
+CREATE FUNCTION validate_room_allocation() RETURNS TRIGGER AS $$
+BEGIN
+  DECLARE cap INTEGER;
+BEGIN
+  SELECT capacity
+  INTO cap
+  FROM hostel_rooms
+  WHERE hostel_name = NEW.hostel_name AND room_no = NEW.room_no;
+
+  -- Check if inserting exceeds capacity
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Room (%, %) not found in hostel_rooms table!', NEW.hostel_name, NEW.room_no;
+  ELSIF (SELECT COUNT(*) FROM allotted_rooms
+          WHERE hostel_name = NEW.hostel_name AND room_no = NEW.room_no) >= cap THEN
+    RAISE EXCEPTION 'Room (%, %) capacity exceeded!', NEW.hostel_name, NEW.room_no;
+  END IF;
+END;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER enforce_room_capacity
+BEFORE INSERT ON allotted_rooms
+FOR EACH ROW
+EXECUTE PROCEDURE validate_room_allocation();
