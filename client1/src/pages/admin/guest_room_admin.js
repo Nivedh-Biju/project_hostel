@@ -104,7 +104,7 @@ function GuestRoom_Admin() {
             <NavBarAdmin />
             <div className='guest_room_admin_inner'>
                 <div className='guest_room_admin_selectors'>
-                    <div className='filter_section'>
+                    <div className='guest_room_filter_section filter_section'>
                         {/* NOTE: Putting no filter for end_date and request_date (as of now) */}
                         <input className='occupant_name_admin' onChange={handleOccupantInput} placeholder="Enter Occupant's Name" />
                         <input className='phone_no_admin' onChange={handlePhoneNoInput} placeholder="Enter Phone No." />
