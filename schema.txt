@@ -1,20 +1,20 @@
-table Student: roll_no(primary key), name, phone_no, family_contact_no, address, sex, password
-
-table Admin: id(primary key), name, phone_no, address
-
-table Leave_records: record_id(primary key), roll_no(reference to Student roll_no), start_date, end_date, reason, status, application_date, admin_id(reference to id of Admin)
-
-table Complaints: roll_no(references Srudent roll_no), complaint_id(primary key), application_date, resolve_date, complaint_date
-
-table Hostel_Rooms: hostel_name(composite primary key), room_no(composite_primary_key), capacity
-
-table Allotted_rooms: hostel_name(composite primary key), room_no(composite_primary_key), roll_no (references Student roll_no)
-
-table Guest_rooms: guest_room(primary key), rate, type
-
-table Guest_house_request: occupant_name, phone_no, start_date, end_date, type, status, request_date
-
-table Allotted_guest_house: guest_room(primary key), occupant_name, phone_no, start_date, end_date, transaction_id, amount_paid, status, admin_id(references Admin id)
+-- table Student: roll_no(primary key), name, phone_no, family_contact_no, address, sex, password
+-- 
+-- table Admin: id(primary key), name, phone_no, address
+-- 
+-- table Leave_records: record_id(primary key), roll_no(reference to Student roll_no), start_date, end_date, reason, status, application_date, admin_id(reference to id of Admin)
+-- 
+-- table Complaints: roll_no(references Srudent roll_no), complaint_id(primary key), application_date, resolve_date, complaint_date
+-- 
+-- table Hostel_Rooms: hostel_name(composite primary key), room_no(composite_primary_key), capacity
+-- 
+-- table Allotted_rooms: hostel_name(composite primary key), room_no(composite_primary_key), roll_no (references Student roll_no)
+-- 
+-- table Guest_rooms: guest_room(primary key), rate, type
+-- 
+-- table Guest_house_request: occupant_name, phone_no, start_date, end_date, type, status, request_date
+-- 
+-- table Allotted_guest_house: guest_room(primary key), occupant_name, phone_no, start_date, end_date, transaction_id, amount_paid, status, admin_id(references Admin id)
 
 
 
@@ -182,46 +182,6 @@ drop constraint "allotted_rooms_pkey";
 alter table allotted_rooms
 add primary key (roll_no);
 
---A trigger to make sure a room's capacity is respected
-CREATE FUNCTION validate_room_allocation() RETURNS TRIGGER AS $$
-BEGIN
-  DECLARE capacity INTEGER;
-BEGIN
-  SELECT capacity
-  INTO capacity
-  FROM hostel_rooms
-  WHERE hostel_name = NEW.hostel_name AND room_no = NEW.room_no;
-
-  -- Check if inserting exceeds capacity
-  IF NOT FOUND THEN
-    RAISE EXCEPTION 'Room (%, %) not found in hostel_rooms table!', NEW.hostel_name, NEW.room_no;
-  ELSIF (SELECT COUNT(*) FROM allotted_rooms
-          WHERE hostel_name = NEW.hostel_name AND room_no = NEW.room_no) >= capacity THEN
-    RAISE EXCEPTION 'Room (%, %) capacity exceeded!', NEW.hostel_name, NEW.room_no;
-  END IF;
-END;
-
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER enforce_room_capacity
-BEFORE INSERT ON allotted_rooms
-FOR EACH ROW
-EXECUTE PROCEDURE validate_room_allocation();
-
--- Insert login details in admin table
-insert into admin(id, name, passwd)
-values ('admin','Ishank','admin');
-
-alter table allotted_guest_house
-drop column transaction_id,
-drop column amount_paid;
-
-
--- change.txt 
-DROP TRIGGER enforce_room_capacity ON allotted_rooms;
-DROP FUNCTION validate_room_allocation;
 
 --A trigger to make sure a room's capacity is respected
 CREATE FUNCTION validate_room_allocation() RETURNS TRIGGER AS $$
