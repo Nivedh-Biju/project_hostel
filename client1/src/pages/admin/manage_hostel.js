@@ -111,7 +111,10 @@ function Manage_Hostel(){
                     placeholder="Enter Room Number" 
                 />
             </div>
-            <button onClick={handleValues}>Allocate</button>
+            <button
+                className='allot_button' 
+                onClick={handleValues}
+            >Allot</button>
         </div>
         </>
     );
