@@ -272,9 +272,9 @@ INSERT INTO Hostel_Rooms (hostel_name, room_no, capacity) VALUES
 
 -- insert data in guest_house_request
 INSERT INTO Guest_house_request (occupant_name, phone_no, start_date, end_date, type, status, request_date) VALUES
-('John Doe', '1234567890', '2024-06-01', '2024-06-05', 'ac+bathroom', 'Pending', '2024-05-01'),
-('Jane Smith', '2345678901', '2024-07-01', '2024-07-03', 'ac', 'Approved', '2024-06-01'),
-('Alice Johnson', '3456789012', '2024-08-01', '2024-08-10', 'non-ac', 'Disapproved', '2024-07-01'),
-('Bob Brown', '4567890123', '2024-09-01', '2024-09-02', 'ac+bathroom', 'Pending', '2024-08-01'),
-('Charlie Davis', '5678901234', '2024-10-01', '2024-10-07', 'ac', 'Approved', '2024-09-01');
+('John Doe', '1234567890', '2024-06-01', '2024-06-05', 'ac+bathroom', 'pending', '2024-05-01'),
+('Jane Smith', '2345678901', '2024-07-01', '2024-07-03', 'ac', 'approved', '2024-06-01'),
+('Alice Johnson', '3456789012', '2024-08-01', '2024-08-10', 'non-ac', 'rejected', '2024-07-01'),
+('Bob Brown', '4567890123', '2024-09-01', '2024-09-02', 'ac+bathroom', 'pending', '2024-08-01'),
+('Charlie Davis', '5678901234', '2024-10-01', '2024-10-07', 'ac', 'approved', '2024-09-01');
 
