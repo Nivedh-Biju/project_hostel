@@ -18,20 +18,15 @@ table Allotted_guest_house: guest_room(primary key), occupant_name, phone_no, st
 
 
 
-SELECT Guest_rooms.guest_room
-FROM Guest_rooms
-LEFT JOIN Alloted_guest_house ON Guest_rooms.guest_room = Alloted_guest_house.guest_room
-WHERE (Alloted_guest_house.start_date IS NULL OR Alloted_guest_house.end_date < 'given_start_date' OR Alloted_guest_house.start_date > 'given_end_date')
-AND type = 'given_type';
 
-
-
-
-
-SELECT Guest_rooms.guest_room
-FROM Guest_rooms
-LEFT JOIN Alloted_guest_house ON Guest_rooms.guest_room = Alloted_guest_house.guest_room
-WHERE (Alloted_guest_house.start_date IS NULL OR Alloted_guest_house.ex CHAR(1),
+-- Creating table Student
+CREATE TABLE Student (
+    roll_no VARCHAR(20) PRIMARY KEY,
+    name VARCHAR(255),
+    phone_no VARCHAR(15),
+    family_contact_no VARCHAR(15),
+    address VARCHAR(255),
+    sex CHAR(1),
     passwd VARCHAR(255)  -- Changed column name to "passwd"
 );
 
@@ -211,3 +206,36 @@ values ('admin','Ishank','admin');
 alter table allotted_guest_house
 drop column transaction_id,
 drop column amount_paid;
+
+
+-- change.txt 
+DROP TRIGGER enforce_room_capacity ON allotted_rooms;
+DROP FUNCTION validate_room_allocation;
+
+--A trigger to make sure a room's capacity is respected
+CREATE FUNCTION validate_room_allocation() RETURNS TRIGGER AS $$
+BEGIN
+  DECLARE cap INTEGER;
+BEGIN
+  SELECT capacity
+  INTO cap
+  FROM hostel_rooms
+  WHERE hostel_name = NEW.hostel_name AND room_no = NEW.room_no;
+
+  -- Check if inserting exceeds capacity
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Room (%, %) not found in hostel_rooms table!', NEW.hostel_name, NEW.room_no;
+  ELSIF (SELECT COUNT(*) FROM allotted_rooms
+          WHERE hostel_name = NEW.hostel_name AND room_no = NEW.room_no) >= cap THEN
+    RAISE EXCEPTION 'Room (%, %) capacity exceeded!', NEW.hostel_name, NEW.room_no;
+  END IF;
+END;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER enforce_room_capacity
+BEFORE INSERT ON allotted_rooms
+FOR EACH ROW
+EXECUTE PROCEDURE validate_room_allocation();
