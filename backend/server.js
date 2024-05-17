@@ -152,7 +152,8 @@ app.put('/api/guest_room_requests_admin_approve', async (req, res) => {
 
   try {
     const result = await pool.query(
-      'UPDATE guest_house_request SET status = \'approved\''
+      'UPDATE guest_house_request SET status = \'approved\' WHERE occupant_name = $1',
+      [occupant_name]
     );
 
     if (result.rowCount === 0) {
@@ -175,7 +176,8 @@ app.put('/api/guest_room_requests_admin_reject', async (req, res) => {
 
   try {
     const result = await pool.query(
-      'UPDATE guest_house_request SET status = \'rejected\''
+      'UPDATE guest_house_request SET status = \'rejected\' WHERE occupant_name = $1',
+      [occupant_name]
     );
 
     if (result.rowCount === 0) {
