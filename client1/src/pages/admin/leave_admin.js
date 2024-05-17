@@ -82,6 +82,23 @@ function LeaveAdmin() {
         setSelectedApplication(null);
     };
 
+    const formatDate = (date) => {
+        const d = new Date(date);
+        let day = d.getDate();
+        let month = d.getMonth() + 1; // Months are zero indexed
+        const year = d.getFullYear();
+    
+        if (day < 10) {
+            day = '0' + day;
+        }
+    
+        if (month < 10) {
+            month = '0' + month;
+        }
+    
+        return `${day}/${month}/${year}`;
+    };
+
     return (
         <div className='leave_admin_main'>
             <NavBarAdmin />
@@ -113,7 +130,7 @@ function LeaveAdmin() {
                                 >
                                     <p className='leave_id_admin'>Record ID: {application.record_id}</p>
                                     <p className='leave_roll_admin'>Roll No: {application.roll_no}</p>
-                                    <p className='leave_date_admin'>Start Date: {new Date(application.start_date).toLocaleDateString()}</p>
+                                    <p className='leave_date_admin'>Start Date: {formatDate(application.start_date)}</p>
                                     <p className='leave_status_admin'>Status: {application.status}</p>
                                 </li>
                             ))}
