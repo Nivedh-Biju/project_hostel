@@ -11,11 +11,10 @@ function Home_Admin(){
         <>
         <NavBarAdmin/>
         <div className='home_admin_main'>
-            <h1>Good Morning {user.id}</h1>
-            <button onClick={ () => {navigate('/get_student');}}></button>
+            <h1>Good Morning <span style={{color:"blue"}}>{user.id}</span></h1>
+            <button onClick={ () => {navigate('/get_student');}}>Check Hostel Allotment</button>
         </div>
         </>
     );
 }
-
 export default Home_Admin;

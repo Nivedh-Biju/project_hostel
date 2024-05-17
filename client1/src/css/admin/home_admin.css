@@ -1,4 +1,5 @@
 .home_admin_main {
+    margin-left: 30px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -7,6 +8,22 @@
 .home_admin_main h1 {
     font-size: 2rem;
     margin-bottom: 2rem;
+}
+
+.home_admin_main button{
+    background-color: aqua;
+    font-size: 1.2rem;
+    color: black;
+    border-radius: 100px;
+    box-shadow: 5px 5px 5px black;
+    transition: 0.3s;
+}
+
+.home_admin_main button:hover{
+    background-color: rgb(3, 225, 225);
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 10px 10px 10px #333;
 }
 
 button {
@@ -25,3 +42,4 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
