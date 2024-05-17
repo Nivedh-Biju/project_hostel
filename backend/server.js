@@ -152,6 +152,103 @@ app.get('/api/complaints_admin', async (req, res) => {
 });
 
 
+app.get('/api/guest_room_requests_admin', async (req, res) => {
+  const {occupant_name, phone_no, start_date, end_date, type, status, request_date} = req.query;
+  console.log(req.query);
+  try {
+    let query = "SELECT * ";
+    query += "FROM guest_house_request ";
+    query += "WHERE occupant_name IS NOT NULL";
+    let params = [];
+    let paramIndex = 1; // To keep track of parameter indices
+    
+    if (occupant_name!='') {
+        query += ` AND occupant_name LIKE $${paramIndex}`;
+        params.push(`%${occupant_name}%`);
+        paramIndex++;
+    }
+    
+    if (phone_no!='') {
+        query += ` AND phone_no LIKE $${paramIndex}`;
+        params.push(`%${phone_no}%`);
+        paramIndex++;
+    }
+
+    if (start_date !='') {
+        query += ` AND start_date = $${paramIndex}`;
+        params.push(start_date);
+        paramIndex++;
+    }
+
+    if (type!='') {
+        query += ` AND type = $${paramIndex}`;
+        params.push(type);
+        paramIndex++;
+    }
+
+    if (status!='') {
+        query += ` AND status = $${paramIndex}`;
+        params.push(status);
+        paramIndex++;
+    }
+
+    query += ` ORDER BY request_date DESC`;
+    const { rows: guest_room_requests } = await pool.query(query, params);
+    res.json(guest_room_requests);
+} catch (error) {
+    console.error('Error fetching guest_room_requests:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+});
+
+app.put('/api/guest_room_requests_admin_approve', async (req, res) => {
+  const { occupant_name, user } = req.body;
+
+  if (!occupant_name || !user) {
+    return res.status(400).send('Request ID and user ID are required');
+  }
+
+  try {
+    const result = await pool.query(
+      'UPDATE guest_house_request SET status = \'approved\' WHERE occupant_name = $1',
+      [occupant_name]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).send('Guest room request not found');
+    }
+
+    res.send('Guest room request marked as approved');
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).send('Server error');
+  }
+});
+
+app.put('/api/guest_room_requests_admin_reject', async (req, res) => {
+  const { occupant_name, user } = req.body;
+
+  if (!occupant_name || !user) {
+    return res.status(400).send('Request ID and user ID are required');
+  }
+
+  try {
+    const result = await pool.query(
+      'UPDATE guest_house_request SET status = \'rejected\' WHERE occupant_name = $1',
+      [occupant_name]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).send('Guest room request not found');
+    }
+
+    res.send('Guest room request marked as rejected');
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).send('Server error');
+  }
+});
+
 app.get('/api/get_students_admin', async (req, res) => {
   const { roll_no, hostel,room_no } = req.query;
   console.log(req.query);
