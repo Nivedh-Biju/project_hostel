@@ -75,6 +75,26 @@ function GuestRoom_Admin() {
         }
     };
 
+    const handleMarkReject = async () => {
+        if (!selectedGuestRoomRequest) return;
+
+        try {
+            await axios.put('http://localhost:3001/api/guest_room_requests_admin_reject', {
+                occupant_name: selectedGuestRoomRequest.occupant_name,
+                user: user.id
+            });
+
+            // Fetch the updated data after marking as resolved
+            const response = await axios.get('http://localhost:3001/api/guest_room_requests_admin', {
+                params: { occupant_name, phone_no, start_date, end_date, type, status, request_date }
+            });
+            setData(response.data);
+            setSelectedGuestRoomRequest(null);
+        } catch (error) {
+            console.error('Error marking as resolved:', error);
+        }
+    };
+
     const handleCloseModal = () => {
         setSelectedGuestRoomRequest(null);
     };
@@ -148,7 +168,7 @@ function GuestRoom_Admin() {
                             <p>Request Date: {new Date(selectedGuestRoomRequest.request_date).toLocaleDateString()}</p>
                             <p>Status: {selectedGuestRoomRequest.status}</p>
                             {selectedGuestRoomRequest.status === 'approved' ? (
-                                <p>Status: Approved</p>
+                                <button onClick={handleMarkReject}>Reject</button>
                             ) : (
                                 <button onClick={handleMarkApproved}>Approve</button>
                             )}
