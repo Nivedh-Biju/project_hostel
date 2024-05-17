@@ -38,9 +38,10 @@ function Leave_Student() {
                     {leaveRequests.length === 0 ? (
                         <p>No leave requests found.</p>
                     ) : (
-                        <ul>
+                        <ul className='items'>
                             {leaveRequests.map(request => (
-                                <li key={request.record_id}>
+                                // <div>
+                                <li key={request.record_id} className='item'>
                                     <p>Request ID: {request.record_id}</p>
                                     <p>Roll No: {request.roll_no}</p>
                                     <p>Start Date: {request.start_date}</p>
@@ -50,6 +51,7 @@ function Leave_Student() {
                                     <p>Application Date: {request.application_date}</p>
                                     <p>Admin ID: {request.admin_id}</p>
                                 </li>
+                                // </div>
                             ))}
                         </ul>
                     )}
