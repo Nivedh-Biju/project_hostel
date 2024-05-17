@@ -130,7 +130,7 @@ function GuestRoom_Admin() {
                             <option value=''>All</option>
                             <option value='approved'>Approved</option>
                             <option value='pending'>Pending</option>
-                            <option value='disapproved'>Disapproved</option>
+                            <option value='rejected'>Rejected</option>
                         </select>
                     </div>
                 </div>
