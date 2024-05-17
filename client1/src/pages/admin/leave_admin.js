@@ -87,14 +87,14 @@ function LeaveAdmin() {
             <NavBarAdmin />
             <div className='leave_admin_inner'>
                 <div className='leave_admin_selectors'>
-                    <div className='filter_section'>
+                    <div className='filter_section_leave_admin'>
                         <input 
-                            className='date_input_admin'
+                            className='date_input_leave_admin'
                             type='date' 
                             value={date} 
                             onChange={(e) => setDate(e.target.value)} 
                         />
-                        <select className='select_status_admin' value={status} onChange={handleStatusInput}>
+                        <select className='select_status_leave_admin' value={status} onChange={handleStatusInput}>
                             <option value=''>All</option>
                             <option value='Approved'>Approved</option>
                             <option value='Pending'>Pending</option>
