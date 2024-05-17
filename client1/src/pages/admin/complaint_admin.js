@@ -66,6 +66,22 @@ function Complaint_Student() {
         }
     };
     
+    const formatDate = (date) => {
+        const d = new Date(date);
+        let day = d.getDate();
+        let month = d.getMonth() + 1; // Months are zero indexed
+        const year = d.getFullYear();
+    
+        if (day < 10) {
+            day = '0' + day;
+        }
+    
+        if (month < 10) {
+            month = '0' + month;
+        }
+    
+        return `${day}/${month}/${year}`;
+    };
 
     const handleCloseModal = () => {
         setSelectedComplaint(null);
@@ -111,7 +127,7 @@ function Complaint_Student() {
                                     <p className='complaint_id_admin'>serial: {item.complaint_id}</p>
                                     <p className='complaint_roll_admin'>roll_no: {item.roll_no}</p>
                                     <p className='complaint_type_admin'>Type: {item.complaint_type}</p>
-                                    <p className='complaint_date_admin'>Application Date: {new Date(item.application_date).toLocaleDateString()}</p>
+                                    <p className='complaint_date_admin'>Application Date: {formatDate(item.application_date)}</p>
                                     <p className='complaint_status_admin'>Status: {item.resolve_date ? 'Resolved' : 'Not Resolved'}</p>
                                 </li>
                             ))}
