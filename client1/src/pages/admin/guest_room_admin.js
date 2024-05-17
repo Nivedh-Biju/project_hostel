@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import NavBarAdmin from '../../components/navbarAdmin';
 import UserContext from '../usercontext';
 import axios from 'axios';
-import "../../css/guest_room_admin.css";
+import "../../css/admin/guest_room_admin.css";
 
 function GuestRoom_Admin() {
     const { state } = useLocation();

@@ -19,6 +19,8 @@
 .create_complaint{
     background: aqua;
     height: 5rem;
+    margin-top: -50px;
+    margin-bottom: 70px;
     flex: 0 0 50%;
     border-radius: 5em;
     font-size: 2rem;
@@ -45,7 +47,6 @@
 
 .date_input{
     font-size: 1.3rem;
-    margin-left: 5rem;
     height: 4rem;
     margin-right: 5rem;
     color: #333;
@@ -101,6 +102,7 @@
     color: #333;
     flex: 0 0 90%;
     display: flex;
+    justify-content: center;
     background-color: #aeadad;
     margin-top: 2rem;
     border-radius: 2rem;
@@ -108,7 +110,6 @@
 }
 .complaint_item p{
     flex: 0 0 18%;
-    margin-left: 2rem;
     color: black;
     font-weight: 500;
 }
