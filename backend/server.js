@@ -167,6 +167,29 @@ app.put('/api/guest_room_requests_admin_approve', async (req, res) => {
   }
 });
 
+app.put('/api/guest_room_requests_admin_reject', async (req, res) => {
+  const { occupant_name, user } = req.body;
+
+  if (!occupant_name || !user) {
+    return res.status(400).send('Request ID and user ID are required');
+  }
+
+  try {
+    const result = await pool.query(
+      'UPDATE guest_house_request SET status = \'rejected\''
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).send('Guest room request not found');
+    }
+
+    res.send('Guest room request marked as rejected');
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).send('Server error');
+  }
+});
+
 
 app.put('/api/complaints_admin_resolve', async (req, res) => {
   const { complaint_id, user } = req.body;
