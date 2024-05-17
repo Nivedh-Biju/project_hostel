@@ -18,20 +18,15 @@ table Allotted_guest_house: guest_room(primary key), occupant_name, phone_no, st
 
 
 
-SELECT Guest_rooms.guest_room
-FROM Guest_rooms
-LEFT JOIN Alloted_guest_house ON Guest_rooms.guest_room = Alloted_guest_house.guest_room
-WHERE (Alloted_guest_house.start_date IS NULL OR Alloted_guest_house.end_date < 'given_start_date' OR Alloted_guest_house.start_date > 'given_end_date')
-AND type = 'given_type';
 
-
-
-
-
-SELECT Guest_rooms.guest_room
-FROM Guest_rooms
-LEFT JOIN Alloted_guest_house ON Guest_rooms.guest_room = Alloted_guest_house.guest_room
-WHERE (Alloted_guest_house.start_date IS NULL OR Alloted_guest_house.ex CHAR(1),
+-- Creating table Student
+CREATE TABLE Student (
+    roll_no VARCHAR(20) PRIMARY KEY,
+    name VARCHAR(255),
+    phone_no VARCHAR(15),
+    family_contact_no VARCHAR(15),
+    address VARCHAR(255),
+    sex CHAR(1),
     passwd VARCHAR(255)  -- Changed column name to "passwd"
 );
 
