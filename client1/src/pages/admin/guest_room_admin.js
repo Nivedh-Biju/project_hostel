@@ -167,10 +167,15 @@ function GuestRoom_Admin() {
                             <p>End Date: {new Date(selectedGuestRoomRequest.end_date).toLocaleDateString()}</p>
                             <p>Request Date: {new Date(selectedGuestRoomRequest.request_date).toLocaleDateString()}</p>
                             <p>Status: {selectedGuestRoomRequest.status}</p>
-                            {selectedGuestRoomRequest.status === 'approved' ? (
-                                <button onClick={handleMarkReject}>Reject</button>
-                            ) : (
-                                <button onClick={handleMarkApproved}>Approve</button>
+                            {selectedGuestRoomRequest.status === 'pending' ? (
+                                <>
+                                    <button onClick={handleMarkApproved}>Approve</button>
+                                    <button onClick={handleMarkReject}>Reject</button>
+                                </>
+                                ) : selectedGuestRoomRequest.status === 'approved'  ? (
+                                    <button onClick={handleMarkReject}>Reject</button>
+                                ) : (
+                                    <button onClick={handleMarkApproved}>Approve</button>
                             )}
                         </div>
                     </div>
