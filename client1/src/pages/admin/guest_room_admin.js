@@ -99,6 +99,23 @@ function GuestRoom_Admin() {
         setSelectedGuestRoomRequest(null);
     };
 
+    const formatDate = (date) => {
+        const d = new Date(date);
+        let day = d.getDate();
+        let month = d.getMonth() + 1; // Months are zero indexed
+        const year = d.getFullYear();
+    
+        if (day < 10) {
+            day = '0' + day;
+        }
+    
+        if (month < 10) {
+            month = '0' + month;
+        }
+    
+        return `${day}/${month}/${year}`;
+    };
+
     return (
         <div className='guest_room_admin_main'>
             <NavBarAdmin />
@@ -146,10 +163,10 @@ function GuestRoom_Admin() {
                                     <p className='guest_room_occupant_name_admin'>Occupant's Name: {item.occupant_name}</p>
                                     <p className='guest_room_phone_no_admin'>Phone No.: {item.phone_no}</p>
                                     {/* <p className='guest_room_type_admin'>Room Type: {item.type}</p> */}
-                                    <p className='guest_room_date_admin'>Start Date: {new Date(item.start_date).toLocaleDateString()}</p>
-                                    <p className='guest_room_date_admin'>End Date: {new Date(item.end_date).toLocaleDateString()}</p>
+                                    <p className='guest_room_date_admin'>Start Date: {formatDate(item.start_date)}</p>
+                                    <p className='guest_room_date_admin'>End Date: {formatDate(item.end_date)}</p>
                                     {/* <p className='guest_room_status_admin'>Status: {item.status}</p> */}
-                                    <p className='guest_room_date_admin'>Request Date: {new Date(item.request_date).toLocaleDateString()}</p>
+                                    <p className='guest_room_date_admin'>Request Date: {formatDate(item.request_date)}</p>
                                 </li>
                             ))}
                         </ul>
