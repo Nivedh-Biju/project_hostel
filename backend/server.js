@@ -519,35 +519,37 @@ app.post("/api/create_leave_request", async (req, res) => {
 });
 
 app.get('/api/leave_admin', async (req, res) => {
-  const { roll_no, start_date, end_date, reason, status, application_date, admin_id } = req.query;
-
+  const { start_date, status } = req.query;
+  console.log(req.query);
   try {
       let query = "SELECT * FROM Leave_records WHERE 1 = 1"; // Always true condition to start building the query dynamically
-      const values = [];
+      let values = [];
+      let valuesIndex = 1;
 
-      // Roll number filter
-      if (roll_no) {
-          query += ' AND roll_no = $1';
-          values.push(roll_no);
-      }
+      // // Roll number filter
+      // if (roll_no) {
+      //     query += ' AND roll_no = $1';
+      //     values.push(roll_no);
+      // }
 
       // Start date filter
       if (start_date) {
-          query += ' AND start_date = $' + (values.length + 1);
+          query += ` AND start_date = $${valuesIndex}`;
           values.push(start_date);
+          valuesIndex++;
       }
 
-      // End date filter
-      if (end_date) {
-          query += ' AND end_date = $' + (values.length + 1);
-          values.push(end_date);
-      }
+      // // End date filter
+      // if (end_date) {
+      //     query += ' AND end_date = $' + (values.length + 1);
+      //     values.push(end_date);
+      // }
 
-      // Reason filter
-      if (reason) {
-          query += ' AND reason = $' + (values.length + 1);
-          values.push(reason);
-      }
+      // // Reason filter
+      // if (reason) {
+      //     query += ' AND reason = $' + (values.length + 1);
+      //     values.push(reason);
+      // }
 
       // Status filter
       if (status) {
@@ -555,17 +557,17 @@ app.get('/api/leave_admin', async (req, res) => {
           values.push(status);
       }
 
-      // Application date filter
-      if (application_date) {
-          query += ' AND application_date = $' + (values.length + 1);
-          values.push(application_date);
-      }
+      // // Application date filter
+      // if (application_date) {
+      //     query += ' AND application_date = $' + (values.length + 1);
+      //     values.push(application_date);
+      // }
 
-      // Admin ID filter
-      if (admin_id) {
-          query += ' AND admin_id = $' + (values.length + 1);
-          values.push(admin_id);
-      }
+      // // Admin ID filter
+      // if (admin_id) {
+      //     query += ' AND admin_id = $' + (values.length + 1);
+      //     values.push(admin_id);
+      // }
 
       const leaveRequests = await pool.query(query, values);
 

@@ -8,7 +8,7 @@ import "../../css/admin/leave_admin.css";
 function LeaveAdmin() {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
-    const [date, setDate] = useState('');
+    const [start_date, setDate] = useState('');
     const [status, setStatus] = useState('');
     const [selectedApplication, setSelectedApplication] = useState(null); // State for selected leave application
     const { user } = useContext(UserContext); // Assuming you have user authentication
@@ -17,7 +17,7 @@ function LeaveAdmin() {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:3001/api/leave_admin', {
-                    params: { date, status }
+                    params: { start_date, status }
                 });
                 setData(response.data);
             } catch (error) {
@@ -26,7 +26,7 @@ function LeaveAdmin() {
         };
 
         fetchData();
-    }, [date, status]);
+    }, [start_date, status]);
 
     const handleStatusInput = (e) => {
         console.log("setting status, "+e.target.value)
@@ -49,7 +49,7 @@ function LeaveAdmin() {
             
             // Fetch the updated data after marking as approved
             const response = await axios.get('http://localhost:3001/api/leave_admin', {
-                params: { date, status }
+                params: { start_date, status }
             });
             setData(response.data);
             setSelectedApplication(null);
@@ -69,7 +69,7 @@ function LeaveAdmin() {
             
             // Fetch the updated data after marking as rejected
             const response = await axios.get('http://localhost:3001/api/leave_admin', {
-                params: { date, status }
+                params: { start_date, status }
             });
             setData(response.data);
             setSelectedApplication(null);
@@ -91,7 +91,7 @@ function LeaveAdmin() {
                         <input 
                             className='date_input_leave_admin'
                             type='date' 
-                            value={date} 
+                            value={start_date} 
                             onChange={(e) => setDate(e.target.value)} 
                         />
                         <select className='select_status_leave_admin' value={status} onChange={handleStatusInput}>
