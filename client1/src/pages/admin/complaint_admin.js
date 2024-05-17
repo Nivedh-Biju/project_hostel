@@ -78,7 +78,7 @@ function Complaint_Student() {
                 <div className='complaint_admin_selectors'>
                     <div className='filter_section'>
                         <input 
-                            className='date_input_admin'
+                            className='complaint_date_input_admin date_input_admin'
                             type='date' 
                             value={date} 
                             onChange={(e) => setDate(e.target.value)} 
