@@ -13,3 +13,47 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.made_by{
+  color: rgb(0, 17, 255);
+  font-weight: 600;
+  position: fixed;
+  bottom:55px;
+  right: calc(5px + 5.1rem);
+}
+
+.credit{
+  position: fixed;
+  display: flex;
+  flex-direction: row-reverse;
+  background-size: contain;
+  bottom: 10px;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100px;
+  border: solid black;
+}
+
+.credit:hover{
+  cursor: pointer;
+}
+
+#c1{
+  right: 5px;
+  background-image: url("https://avatars.githubusercontent.com/u/82446314?v=4");
+}
+
+#c2{
+  right: calc(5px + 2.7rem);
+  background-image: url("https://avatars.githubusercontent.com/u/71959306?v=4");
+}
+
+#c3{
+  right: calc(5px + 5.4rem);
+  background-image: url("https://avatars.githubusercontent.com/u/133032705?v=4");
+}
+
+#c4{
+  right: calc(5px + 8.1rem);
+  background-image: url("https://avatars.githubusercontent.com/u/125106178?v=4");
+}

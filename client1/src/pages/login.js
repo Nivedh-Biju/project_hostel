@@ -54,6 +54,7 @@ function Login(){
     };
 
     return(
+        <>
         <div className='Login_main'>
             <div className='upper_label'>Hostel Portal</div>
             <div className='Login_inner'>
@@ -75,6 +76,30 @@ function Login(){
                 </div>
             </div>
         </div>
+        <div class='made_by'>
+            DEVELOPED BY:
+            <a 
+                id='c4'
+                class='credit'
+                href="https://github.com/Nivedh-Biju"
+                target='_blank'></a>
+            <a
+                id='c3'
+                class='credit'
+                href="https://github.com/satvikaryan"
+                target='_blank'></a>
+            <a
+                id='c2'
+                class='credit'
+                href="https://github.com/ishankkumar-007"
+                target='_blank'></a>
+            <a
+                id='c1'
+                class='credit'
+                href="https://github.com/Talentedfalcon"
+                target='_blank'></a>
+        </div>
+        </>
     );
 }
 
